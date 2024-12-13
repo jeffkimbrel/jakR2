@@ -1,7 +1,7 @@
 Package: jakR2
 Title: Jeff Kimbrel's R functions
-Version: 0.0.1.9001
-URL: https://jeffkimbrel.github.io/jakR2
+Version: 0.0.1.9002
+URL: https://jeffkimbrel.github.io/jakR2, https://jeffkimbrel.github.io/jakR2/
 Authors@R: 
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
