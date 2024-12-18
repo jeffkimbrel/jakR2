@@ -5,6 +5,12 @@ template:
   light-switch: true
 
 reference:
+- title: Genomics
+  contents:
+  - read_orthogroups
+  - orthogroup_list2counts
+
 - title: Miscellaneous
   contents:
   - file2gfm
+
