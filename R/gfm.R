@@ -1,3 +1,32 @@
+#' Decorate an Obsidian link for gfm markdown
+#'
+#' @param link A string representing the link
+#' @param text A string representing the text to display
+#'
+#' @export
+
+
+obs2gfm = function(link, text = NA) {
+
+  # if link contains "|" give error to reformat and use text argument
+  stopifnot("<link> should not contain `|`, try using the <text> argument as well" = !grepl("\\|", link))
+
+  if (is.na(text)) {
+    glue::glue("`[[{{link}}]]`{=gfm}",
+               .open = "{{",
+               .close = "}}"
+    )
+  } else {
+    glue::glue("`[[{{link}}|{{text}}]]`{=gfm}",
+               .open = "{{",
+               .close = "}}"
+    )
+  }
+
+
+}
+
+
 #' Decorate a file string for gfm markdown in Obsidian
 #'
 #' This function takes a file path and returns a string with the file path as a
@@ -29,8 +58,6 @@ file2gfm <- function(file,
     # otherwise, expand the file to a complete path
     file = path.expand(file)
   }
-
-
 
   if (verify) {
     stopifnot("<file> doesn't appear to exist" = file.exists(file))
