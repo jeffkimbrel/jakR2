@@ -11,6 +11,9 @@
 read_orthogroups <- function(file,
                              type = "counts",
                              quiet = F) {
+  GENE_LIST <- NULL
+
+
   # error if file doesnt exist
   if (!file.exists(file)) {
     stop("<file> does not appear to exist", call. = F)
@@ -87,6 +90,8 @@ read_orthogroups <- function(file,
 
 orthogroup_list2counts <- function(orthogroups, verify = F) {
 
+  GENE <- GENOME <- L <- NULL
+
   #
   if (isFALSE(inherits(orthogroups, "data.frame"))) {
     stop("<orthogroups> doesn't seem to be a dataframe", call. = F)
@@ -106,7 +111,7 @@ orthogroup_list2counts <- function(orthogroups, verify = F) {
       return("list")
     } else {
       orthogroups |>
-        tidyr::pivot_longer(cols = -contains("Orthogroup"), names_to = "GENOME", values_to = "GENE") |>
+        tidyr::pivot_longer(cols = -tidyr::contains("Orthogroup"), names_to = "GENOME", values_to = "GENE") |>
         dplyr::rowwise() |>
         dplyr::mutate(L = length(GENE)) |>
         dplyr::select(-GENE) |>

@@ -1,6 +1,6 @@
 Package: jakR2
-Title: Jeff Kimbrel's R functions
-Version: 0.0.1.9006
+Title: JAK R functions, round 2
+Version: 0.1.0
 Authors@R: 
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
