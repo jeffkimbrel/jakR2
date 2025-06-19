@@ -10,10 +10,19 @@ reference:
   - read_orthogroups
   - orthogroup_list2counts
 
-- title: Miscellaneous
+- title: Phlyogenetics
+  contents:
+  - get_tip_index
+  - get_tip_edges
+
+- title: Markdown
   contents:
   - file2gfm
   - obs2gfm
+
+- title: Themes
+  contents:
+  - jak_theme
 
 - title: CARD
   contents:
