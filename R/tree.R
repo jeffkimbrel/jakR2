@@ -25,8 +25,13 @@ get_tip_index = function(tip, tree) {
 
 
 
-
+#' Get the edges that lead to a tip
 #'
+#' @param tip_index 
+#' @param tree A phylo object
+#' @param type what to return
+#'
+#' @export
 
 get_tip_edges <- function(tip_index, tree, type = "edges") {
 
