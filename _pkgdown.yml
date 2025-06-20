@@ -23,6 +23,9 @@ reference:
 - title: Themes
   contents:
   - jak_theme
+  - palette_jak
+  - scale_color_jak_d
+  - scale_fill_jak_d
 
 - title: CARD
   contents:
@@ -35,3 +38,4 @@ reference:
 - title: internal
   contents:
   - cp_helper
+  - all_are_valid_colors

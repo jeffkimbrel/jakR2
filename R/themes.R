@@ -85,3 +85,55 @@ jak_theme <- function(base_size = 10,
       )
     )
 }
+
+
+
+
+
+
+
+#' Custom discrete ggplot2 scale color
+#'
+#' @param p color palette to use from `jakR2::jak_palettes`
+#' @param colors An optional vector of rgb or colors to use. Overwrites `p`
+#' @param reverse A boolean for whether the palette should be reversed or not
+#'
+#' @export
+
+scale_color_jak_d <- function(p = "bay", colors = NULL, reverse = FALSE) {
+  discrete_scale(
+    "color",
+    palette = function(n) {
+      palette_jak(
+        p = p,
+        colors = colors,
+        n = n, # will be determined as needed and can't be "set"
+        reverse = reverse
+      )
+    }
+  )
+}
+
+
+#' Custom discrete ggplot2 scale fill
+#'
+#' @param p color palette to use from `jakR2::jak_palettes`
+#' @param colors An optional vector of rgb or colors to use. Overwrites `p`
+#' @param reverse A boolean for whether the palette should be reversed or not
+#'
+#' @export
+
+
+scale_fill_jak_d <- function(p = "bay", colors = NULL, reverse = FALSE) {
+  discrete_scale(
+    "fill",
+    palette = function(n) {
+      palette_jak(
+        p = p,
+        colors = colors,
+        n = n, # will be determined as needed and can't be "set"
+        reverse = reverse
+      )
+    }
+  )
+}
