@@ -24,7 +24,7 @@ jak_palettes = list(
   "lake"          = c('#362904','#54450f','#45681e','#4a9152','#64a8a8','#85b6ce','#cde5f9','#eef3ff'),
   "sailboat"      = c('#6e7cb9','#7bbcd5','#d0e2af','#f5db99','#e89c81','#d2848d'),
 
-  # from Paul Tol (https://personal.sron.nl/~pault/data/colourschemes.pdf)
+  # from Paul Tol (https://sronpersonalpages.nl/~pault/)
   "bright"        = c("#4477AA","#66CCEE","#228833","#CCBB44","#EE6677","#AA3377","#BBBBBB"),
   "highContrast"  = c("#FFFFFF","#DDAA33","#BB5566","#004488","#000000"),
   "vibrant"       = c("#007788","#33BBEE","#009988","#EE7733","#CC3311","#EE3377","#BBBBBB"),
