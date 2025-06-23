@@ -101,7 +101,7 @@ jak_theme <- function(base_size = 10,
 #' @export
 
 scale_color_jak_d <- function(p = "bay", colors = NULL, reverse = FALSE) {
-  discrete_scale(
+  ggplot2::discrete_scale(
     "color",
     palette = function(n) {
       palette_jak(
@@ -125,7 +125,7 @@ scale_color_jak_d <- function(p = "bay", colors = NULL, reverse = FALSE) {
 
 
 scale_fill_jak_d <- function(p = "bay", colors = NULL, reverse = FALSE) {
-  discrete_scale(
+  ggplot2::discrete_scale(
     "fill",
     palette = function(n) {
       palette_jak(

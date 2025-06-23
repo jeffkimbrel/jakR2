@@ -16,5 +16,15 @@ palette_jak(p = "bay", colors = NULL, n = 2, reverse = FALSE)
 \item{reverse}{A boolean for whether the palette should be reversed or not}
 }
 \description{
-These palettes can be used all over.
+The function creates a vector of RGB values suitable for ggplot or similar.
+If using the \code{p} argument it will use one of the default palettes in the
+\code{jak_palettes} data object, or you can pass it your own colors using the
+\code{colors} argument. What makes this function useful is that it will extend
+and interpolate the values of the given palette so it can return \code{n} colors.
+The final parameter is whether you want to reverse the values or not.
+}
+\details{
+Internally, the color palette is "ramped" using \code{colorRampPalette()}.
+Further, colors passed via the \code{colors} argument are first checked whether
+they're valid using the \code{all_are_valid_colors()} function.
 }

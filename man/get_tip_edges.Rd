@@ -7,7 +7,7 @@
 get_tip_edges(tip_index, tree, type = "edges")
 }
 \arguments{
-\item{tip_index}{}
+\item{tip_index}{An integer index of a tip in the tree}
 
 \item{tree}{A phylo object}
 

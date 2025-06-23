@@ -10,5 +10,6 @@ all_are_valid_colors(x)
 \item{x}{A vector of colors in rgb or text string}
 }
 \description{
-It appears I copied this function from https://stackoverflow.com/questions/13289009/check-if-character-string-is-a-valid-color-representation
+This function is from \href{https://stackoverflow.com/questions/13289009/}{Stack Overflow #13289009}
+originally by \href{https://stackoverflow.com/users/980833/josh-obrien}{Josh O'Brien}.
 }

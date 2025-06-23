@@ -20,12 +20,17 @@ reference:
   - file2gfm
   - obs2gfm
 
-- title: Themes
+- title: Themes and Colors
   contents:
   - jak_theme
   - palette_jak
   - scale_color_jak_d
   - scale_fill_jak_d
+  - get_color_palette
+  - show_color_palette
+  - show_all_color_palettes
+  - get_luminance
+  - get_text_color
 
 - title: CARD
   contents:

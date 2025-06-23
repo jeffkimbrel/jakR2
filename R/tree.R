@@ -27,7 +27,7 @@ get_tip_index = function(tip, tree) {
 
 #' Get the edges that lead to a tip
 #'
-#' @param tip_index 
+#' @param tip_index An integer index of a tip in the tree
 #' @param tree A phylo object
 #' @param type what to return
 #'
