@@ -4,6 +4,7 @@
 <url><loc>https://jeffkimbrel.github.io/jakR2/LICENSE.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/authors.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/index.html</loc></url>
+<url><loc>https://jeffkimbrel.github.io/jakR2/news/index.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/all_are_valid_colors.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/card_ab2gene.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/card_ab_info.html</loc></url>
@@ -12,6 +13,9 @@
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/card_parse.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/cp_helper.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/file2gfm.html</loc></url>
+<url><loc>https://jeffkimbrel.github.io/jakR2/reference/get_color_palette.html</loc></url>
+<url><loc>https://jeffkimbrel.github.io/jakR2/reference/get_luminance.html</loc></url>
+<url><loc>https://jeffkimbrel.github.io/jakR2/reference/get_text_color.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/get_tip_edges.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/get_tip_index.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/index.html</loc></url>
@@ -22,5 +26,7 @@
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/read_orthogroups.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/scale_color_jak_d.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/scale_fill_jak_d.html</loc></url>
+<url><loc>https://jeffkimbrel.github.io/jakR2/reference/show_all_color_palettes.html</loc></url>
+<url><loc>https://jeffkimbrel.github.io/jakR2/reference/show_color_palette.html</loc></url>
 </urlset>
 
