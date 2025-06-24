@@ -15,6 +15,7 @@
 #' @param strip_line Line width for facet strip titles
 #' @param legend_size Font size for legend
 #' @param legend_position Position of legend
+#' @param legend_border Color for legend border
 #' @param base_family Font family
 #'
 #' @importFrom ggplot2 '%+replace%'
@@ -22,18 +23,19 @@
 
 jak_theme <- function(base_size = 10,
                       plot_title_size = 12,
-                      axis_title_size = 11,
+                      axis_title_size = 12,
                       base_color = "gray30",
                       plot_title_color = "gray30",
                       axis_title_color = "gray30",
                       bg_color = "transparent",
                       grid_color = "gray80",
                       border_width = 0.5,
-                      strip_size = 10,
+                      strip_size = 12,
                       strip_color = "transparent",
                       strip_line = 0,
                       legend_size = 10,
-                      legend_position = "bottom",
+                      legend_position = "right",
+                      legend_border = "transparent",
                       base_family = "") {
 
   ggplot2::theme_bw(base_size = base_size, base_family = base_family) %+replace%
@@ -52,9 +54,9 @@ jak_theme <- function(base_size = 10,
         margin = ggplot2::margin()
       ),
       legend.background = ggplot2::element_blank(),
-      legend.box.background = ggplot2::element_rect(fill = "transparent", color = base_color, size = 0.2),
+      legend.box.background = ggplot2::element_rect(fill = "transparent", color = legend_border, size = 0.2),
       legend.text = ggplot2::element_text(size = legend_size),
-      legend.title = ggplot2::element_text(size = legend_size, face = "bold"),
+      legend.title = ggplot2::element_text(size = legend_size, face = "bold", hjust = 0.5),
       legend.key = ggplot2::element_rect(color = "transparent", fill = "transparent"),
       legend.position = legend_position,
       plot.background = ggplot2::element_rect(fill = bg_color, color = bg_color),
@@ -66,22 +68,31 @@ jak_theme <- function(base_size = 10,
       axis.text = ggplot2::element_text(color = base_color),
       axis.text.x = ggplot2::element_text(angle = 90, hjust = 1, vjust = 0.5),
       axis.title.x = ggplot2::element_text(color = axis_title_color, size = axis_title_size, face = "bold"),
-      axis.title.y = ggplot2::element_text(color = axis_title_color, size = axis_title_size, face = "bold", angle = 90),
+      axis.title.y = ggplot2::element_text(color = axis_title_color, size = axis_title_size, face = "bold", angle = 90, vjust = 1.5),
       strip.background = ggplot2::element_blank(),
       strip.text.x = ggtext::element_textbox(
         size = strip_size,
         color = base_color,
         fill = strip_color,
         width = ggplot2::unit(1, "npc"),
-        halign = 0.5, linetype = 1, r = ggplot2::unit(3, "pt"), linewidth = strip_line,
-        padding = ggplot2::margin(2, 0, 1, 0), margin = ggplot2::margin(2, 2, 2, 2)
+        halign = 0.5,
+        linetype = 1,
+        r = ggplot2::unit(1, "pt"),
+        linewidth = strip_line,
+        padding = ggplot2::margin(2, 1, 1, 1),
+        margin = ggplot2::margin(2, 2, 2, 2)
       ),
       strip.text.y = ggtext::element_textbox(
         size = strip_size,
         color = base_color,
         fill = strip_color,
-        halign = 0.5, linetype = 1, r = ggplot2::unit(3, "pt"), linewidth = strip_line, hjust = 0,
-        padding = ggplot2::margin(4, 0, 1, 0), margin = ggplot2::margin(2, 2, 2, 2)
+        halign = 0.5,
+        linetype = 1,
+        r = ggplot2::unit(1, "pt"),
+        linewidth = strip_line,
+        hjust = 0,
+        padding = ggplot2::margin(4, 2, 2, 2),
+        margin = ggplot2::margin(2, 2, 2, 2)
       )
     )
 }
