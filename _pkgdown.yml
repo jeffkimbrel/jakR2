@@ -10,6 +10,13 @@ reference:
   - read_orthogroups
   - orthogroup_list2counts
 
+- title: Diversity
+  contents:
+  - get_alpha_diversity
+  - get_alpha_S
+  - get_alpha_simpson
+  - get_alpha_shannon
+
 - title: Phlyogenetics
   contents:
   - get_tip_index

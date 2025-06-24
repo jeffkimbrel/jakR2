@@ -7,18 +7,19 @@
 jak_theme(
   base_size = 10,
   plot_title_size = 12,
-  axis_title_size = 11,
+  axis_title_size = 12,
   base_color = "gray30",
   plot_title_color = "gray30",
   axis_title_color = "gray30",
   bg_color = "transparent",
   grid_color = "gray80",
   border_width = 0.5,
-  strip_size = 10,
+  strip_size = 12,
   strip_color = "transparent",
   strip_line = 0,
   legend_size = 10,
-  legend_position = "bottom",
+  legend_position = "right",
+  legend_border = "transparent",
   base_family = ""
 )
 }
@@ -48,6 +49,8 @@ jak_theme(
 \item{legend_size}{Font size for legend}
 
 \item{legend_position}{Position of legend}
+
+\item{legend_border}{Color for legend border}
 
 \item{base_family}{Font family}
 }
