@@ -47,6 +47,11 @@ reference:
   - card_gene2ab
   - card_ab2gene
 
+- title: Utilities
+  contents:
+  - get_package_info
+  - get_session_info
+
 - title: internal
   contents:
   - cp_helper
