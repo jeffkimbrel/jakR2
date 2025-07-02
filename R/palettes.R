@@ -14,14 +14,14 @@
 #' @param n Number of colors to return
 #' @param colors An optional vector of rgb or colors to use. Overwrites `p`
 #' @param p A named color palette
-#' @param reverse A boolean for whether the palette should be reversed or not
+#' @param order default, reverse or random order
 #'
 #' @export
 
 palette_jak <- function(p = "bay",
                         colors = NULL,
                         n = 2,
-                        reverse = FALSE) {
+                        order = "default") {
   # error if "bay" not %in% names(jak_palettes)
   if (!p %in% names(jak_palettes)) {
     stop(paste("palette", p, "not found in jak_palettes. Available palettes are:", paste(sort(names(jak_palettes)), collapse = "\n")))
@@ -29,12 +29,12 @@ palette_jak <- function(p = "bay",
 
   # n must be an integer greater than 0
   if (!is.numeric(n) || length(n) != 1 || n <= 0 || n != round(n)) {
-    stop("n must be a positive integer")
+    stop("<n> must be a positive integer")
   }
 
-  # reverse must be a bool
-  if (!is.logical(reverse) || length(reverse) != 1) {
-    stop("reverse must be a boolean")
+  # order must be default, reverse or random, or else give error
+  if (!order %in% c("default", "reverse", "random")) {
+    stop("<order> must be one of 'default', 'reverse' or 'random'", call. = FALSE)
   }
 
   if (is.null(colors)) {
@@ -47,11 +47,14 @@ palette_jak <- function(p = "bay",
     }
   }
 
-  if (isTRUE(reverse)) {
+  if (order == "reverse") {
     return(rev(cols))
+  } else if (order == "random") {
+    return(sample(cols, length(cols)))
   } else {
     return(cols)
   }
+
 }
 
 

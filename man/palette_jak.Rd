@@ -4,7 +4,7 @@
 \alias{palette_jak}
 \title{A full-service color palette creator}
 \usage{
-palette_jak(p = "bay", colors = NULL, n = 2, reverse = FALSE)
+palette_jak(p = "bay", colors = NULL, n = 2, order = "default")
 }
 \arguments{
 \item{p}{A named color palette}
@@ -13,7 +13,7 @@ palette_jak(p = "bay", colors = NULL, n = 2, reverse = FALSE)
 
 \item{n}{Number of colors to return}
 
-\item{reverse}{A boolean for whether the palette should be reversed or not}
+\item{order}{default, reverse or random order}
 }
 \description{
 The function creates a vector of RGB values suitable for ggplot or similar.
