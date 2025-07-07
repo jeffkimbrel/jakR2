@@ -219,3 +219,55 @@ get_text_color <- function(background_rgb, t = 0.5) {
     return("#FFFFFF")
   }
 }
+
+
+
+
+#' Blend palette with a color
+#'
+#' This idea comes (and uses functions) from the `monochromeR` package and Cara
+#' Thompson's talk titled [“Visualise, Optimise, Parameterise!”](https://www.youtube.com/watch?v=tdaMw6NcNFM&t=2914s).
+#' The idea is that a set of colors in a palette will go together better if you
+#' also blend a common color into all of them.
+#'
+#' @param colors A vector of colors to blend
+#' @param blend A color to blend with the colors
+#' @param amount An integer between 0 and 10 to determine the strength of the blend
+#'
+#' @export
+
+blend_palette = function(colors, blend, amount = 3) {
+
+  # amount must be an integer between 0 and 10
+  if (!is.numeric(amount) || amount < 0 || amount > 10) {
+    stop("Amount must be an integer between 0 and 10.")
+  }
+
+  if (!all(all_are_valid_colors(colors))) {
+    stop("<color> contains invalid colors", call. = F)
+  }
+
+  # blend should be of length 1
+  if (length(blend) != 1) {
+    stop("<blend> must be a single color", call. = F)
+  }
+
+  if (!all_are_valid_colors(blend)) {
+    stop("<blend> is an invalid color", call. = F)
+  }
+
+  amount = 12 - amount
+
+  tibble::enframe(colors, value = "color") |>
+    dplyr::rowwise() |>
+    dplyr::mutate(blend = purrr::map(color, ~suppressMessages(monochromeR::generate_palette(
+      colour = color,
+      n_colours = amount,
+      blend_colour = blend,
+      modification = "blend"
+    )))) |>
+    tidyr::unnest(blend) |>
+    dplyr::mutate(n = dplyr::row_number(), .by = color) |>
+    dplyr::filter(n == 2) |>
+    dplyr::pull(blend)
+}

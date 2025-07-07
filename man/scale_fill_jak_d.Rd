@@ -4,14 +4,14 @@
 \alias{scale_fill_jak_d}
 \title{Custom discrete ggplot2 scale fill}
 \usage{
-scale_fill_jak_d(p = "bay", colors = NULL, reverse = FALSE)
+scale_fill_jak_d(p = "bay", colors = NULL, order = "default")
 }
 \arguments{
 \item{p}{color palette to use from \code{jakR2::jak_palettes}}
 
 \item{colors}{An optional vector of rgb or colors to use. Overwrites \code{p}}
 
-\item{reverse}{A boolean for whether the palette should be reversed or not}
+\item{order}{Order of the palette, "default", "reverse" or "random}
 }
 \description{
 Custom discrete ggplot2 scale fill
