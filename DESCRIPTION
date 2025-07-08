@@ -1,6 +1,6 @@
 Package: jakR2
 Title: JAK R functions, round 2
-Version: 0.2.4.9000
+Version: 0.2.5
 Authors@R: 
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
@@ -19,9 +19,12 @@ Suggests:
     testthat (>= 3.0.0),
     here,
     ggtext,
+    crayon,
+    pastecs,
     sessioninfo
 Imports: 
     dplyr,
+    forcats,
     ggplot2,
     glue,
     jsonlite,

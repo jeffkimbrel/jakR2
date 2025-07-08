@@ -1,3 +1,5 @@
+# jakR2 0.2.5
+
 # jakR2 0.2
 
 * Helpful functions to create and work with palettes and colors
