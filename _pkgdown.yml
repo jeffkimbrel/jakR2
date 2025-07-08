@@ -48,6 +48,12 @@ reference:
   - card_gene2ab
   - card_ab2gene
 
+- title: fastq
+  contents:
+  - fastq_info_summary
+  - fastq_filter_summary_amplicon
+  - fastq_filter_summary_meta
+
 - title: Utilities
   contents:
   - get_package_info
