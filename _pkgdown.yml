@@ -31,6 +31,7 @@ reference:
   contents:
   - jak_theme
   - palette_jak
+  - blend_palette
   - scale_color_jak_d
   - scale_fill_jak_d
   - get_color_palette
