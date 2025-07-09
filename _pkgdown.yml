@@ -40,6 +40,16 @@ reference:
   - get_luminance
   - get_text_color
 
+- title: Amplicons and ASVs
+  contents:
+  - seqtab_stats
+  - seqtab_to_ft
+  - ft
+  - get_asv_table
+  - get_sequences
+  - filter_asv_table
+  - cluster_asv_table
+
 - title: CARD
   contents:
   - card_parse
