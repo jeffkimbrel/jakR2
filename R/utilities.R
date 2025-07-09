@@ -29,7 +29,7 @@ get_package_info <- function(attached = TRUE) {
 
   # attached must be true/false
   if (!is.logical(attached) || length(attached) != 1) {
-    stop("The 'attached' argument must be a single logical value (TRUE or FALSE).", call. = F)
+    stop("<attached> must be TRUE/FALSE", call. = FALSE)
   }
 
   df <- sessioninfo::package_info() |>

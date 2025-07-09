@@ -1,5 +1,5 @@
 test_that("output looks correct", {
-  expect_equal(file2gfm("~/test.md"), "`[test.md](<file:///Users/kimbrel1/test.md>)`{=gfm}")
+  expect_equal(file2gfm("/Users/kimbrel1/test.md"), "`[test.md](<file:///Users/kimbrel1/test.md>)`{=gfm}")
 })
 
 test_that("verify looks OK", {

@@ -11,7 +11,7 @@ scale_color_jak_d(p = "bay", colors = NULL, order = "default")
 
 \item{colors}{An optional vector of rgb or colors to use. Overwrites \code{p}}
 
-\item{order}{Order of the palette, "default", "reverse" or "random}
+\item{order}{Order of the palette, "default", "reverse" or "random"}
 }
 \description{
 Custom discrete ggplot2 scale color

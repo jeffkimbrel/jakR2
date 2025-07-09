@@ -36,7 +36,8 @@ jak_theme <- function(base_size = 10,
                       legend_position = "bottom",
                       base_family = "") {
 
-  ggplot2::theme_bw(base_size = base_size, base_family = base_family) %+replace%
+  ggplot2::theme_bw(base_size = base_size,
+                    base_family = base_family) %+replace%
     ggplot2::theme(
       line = ggplot2::element_line(color = base_color, size = 0.2, linetype = 1, lineend = "butt"),
       rect = ggplot2::element_rect(fill = "transparent", color = base_color, size = 0.5, linetype = 1),
@@ -96,11 +97,29 @@ jak_theme <- function(base_size = 10,
 #'
 #' @param p color palette to use from `jakR2::jak_palettes`
 #' @param colors An optional vector of rgb or colors to use. Overwrites `p`
-#' @param order Order of the palette, "default", "reverse" or "random
+#' @param order Order of the palette, "default", "reverse" or "random"
 #'
 #' @export
 
-scale_color_jak_d <- function(p = "bay", colors = NULL, order = "default") {
+scale_color_jak_d <- function(p = "bay",
+                              colors = NULL,
+                              order = "default") {
+
+  # p must be in the names of jak_palettes
+  if (!p %in% names(jak_palettes)) {
+    stop(paste0("'", p, "' is not a known palette name"))
+  }
+
+  # if colors isn't null, run through all_are_valid_colors()
+  if (!is.null(colors) && !all(all_are_valid_colors(colors))) {
+    stop("Invalid <colors> given")
+  }
+
+  # order must be default, reverse or random
+  if (!order %in% c("default", "reverse", "random")) {
+    stop("<order> must be 'default', 'reverse' or 'random'")
+  }
+
   ggplot2::discrete_scale(
     "color",
     palette = function(n) {
@@ -119,12 +138,28 @@ scale_color_jak_d <- function(p = "bay", colors = NULL, order = "default") {
 #'
 #' @param p color palette to use from `jakR2::jak_palettes`
 #' @param colors An optional vector of rgb or colors to use. Overwrites `p`
-#' @param order Order of the palette, "default", "reverse" or "random
+#' @param order Order of the palette, "default", "reverse" or "random"
 #'
 #' @export
 
 
 scale_fill_jak_d <- function(p = "bay", colors = NULL, order = "default") {
+
+  # p must be in the names of jak_palettes
+  if (!p %in% names(jak_palettes)) {
+    stop(paste0("'", p, "' is not a known palette name"))
+  }
+
+  # if colors isn't null, run through all_are_valid_colors()
+  if (!is.null(colors) && !all(all_are_valid_colors(colors))) {
+    stop("Invalid <colors> given")
+  }
+
+  # order must be default, reverse or random
+  if (!order %in% c("default", "reverse", "random")) {
+    stop("<order> must be 'default', 'reverse' or 'random'")
+  }
+
   ggplot2::discrete_scale(
     "fill",
     palette = function(n) {
