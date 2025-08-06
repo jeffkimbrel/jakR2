@@ -52,7 +52,7 @@ fastq_info_summary <- function(file, fill = "cornflowerblue") {
     dplyr::mutate(RUN_INFO = gsub("\'", "\"", RUN_INFO)) |>
     dplyr::mutate(json = purrr::map(RUN_INFO, ~ jsonlite::fromJSON(.) |> as.data.frame())) |>
     tidyr::unnest(json) |>
-    tidyr::pivot_longer(cols = c(everything(), -SAMPLE, -RUN_INFO), names_to = "RUN_ID", values_to = "READS", values_drop_na = TRUE) |>
+    tidyr::pivot_longer(cols = c(tidyselect::everything(), -SAMPLE, -RUN_INFO), names_to = "RUN_ID", values_to = "READS", values_drop_na = TRUE) |>
     dplyr::group_by(RUN_ID) |>
     dplyr::summarise(TOTAL_READS = sum(READS))
 
@@ -148,7 +148,7 @@ fastq_filter_summary_amplicon <- function(file) {
 fastq_filter_summary_meta <- function(file) {
   df <- readr::read_tsv(file, comment = "#") |>
     dplyr::select(-ORDER_VERIFIED) |>
-    tidyr::pivot_longer(cols = c(everything(), -SAMPLE))
+    tidyr::pivot_longer(cols = c(tidyselect::everything(), -SAMPLE))
 
   reads <- df |>
     tidyr::separate(name, into = c("STEP", "TYPE", "RESULT"), sep = "_") |>
@@ -160,7 +160,7 @@ fastq_filter_summary_meta <- function(file) {
     ggplot2::ggplot(ggplot2::aes(x = STEP, y = value, fill = RESULT)) +
     ggplot2::geom_col() +
     ggplot2::facet_wrap(TYPE ~ SAMPLE, scales = "free_y") +
-    jakR::jak_theme() +
+    #jakR::jak_theme() +
     ggplot2::scale_y_log10() +
     ggplot2::scale_fill_manual(values = c("OUT" = "gray30", "REMOVED" = "orange"))
 
@@ -174,7 +174,7 @@ fastq_filter_summary_meta <- function(file) {
     ggplot2::ggplot(ggplot2::aes(x = STEP, y = value, fill = RESULT)) +
     ggplot2::geom_col() +
     ggplot2::facet_wrap(TYPE ~ SAMPLE, scales = "free_y") +
-    jakR::jak_theme() +
+    #jakR::jak_theme() +
     ggplot2::scale_y_log10() +
     ggplot2::scale_fill_manual(values = c("OUT" = "gray30", "REMOVED" = "orange"))
 

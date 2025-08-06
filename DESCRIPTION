@@ -1,6 +1,6 @@
 Package: jakR2
 Title: JAK R functions, round 2
-Version: 0.3.0
+Version: 0.3.1
 Authors@R: 
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))

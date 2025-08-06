@@ -1,8 +1,9 @@
-# jakR2 0.3.0
+# jakR2 0.3
 
 * A new `S7` object called `ft` to hold feature tables
 * methods for filtering based on min count and sample
 * methods for OTU clustering
+* some reusable regular expressions
 
 # jakR2 0.2
 

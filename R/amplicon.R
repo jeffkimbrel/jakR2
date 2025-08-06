@@ -41,7 +41,7 @@ seqtab_stats <- function(seqtab) {
     dplyr::mutate(LENGTH = as.integer(as.character(LENGTH)))
 
   sizes_freq |>
-    dplyr::left_join(sizes_abund, by = join_by(LENGTH))
+    dplyr::left_join(sizes_abund, by = dplyr::join_by(LENGTH))
 }
 
 

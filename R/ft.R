@@ -12,7 +12,7 @@ seqtab_to_ft <- function(seqtab, clean = "_F_filt.fastq.gz") {
     tibble::rownames_to_column("SEQUENCE") |>
     tibble::as_tibble() |>
     dplyr::mutate(ASV = paste0("ASV", seq(dplyr::n()))) |>
-    dplyr::select(ASV, everything())
+    dplyr::select(ASV, tidyselect::everything())
 
   names(feature_table) <- gsub(clean, "", names(feature_table))
 
@@ -218,7 +218,7 @@ S7::method(cluster_asv_table, ft) <- function(x, id = 0.99, nproc = 1, quiet = T
     dplyr::select(-cluster, -asv_sum) |>
     tidyr::pivot_wider(names_from = name, values_from = cluster_sum, values_fill = 0) |>
     dplyr::left_join(seqs, by = dplyr::join_by(ASV)) |>
-    dplyr::select(ASV, SEQUENCE, everything())
+    dplyr::select(ASV, SEQUENCE, tidyselect::everything())
 
   return(x)
 }
