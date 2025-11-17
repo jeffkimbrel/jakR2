@@ -49,6 +49,8 @@ reference:
   - get_sequences
   - filter_asv_table
   - cluster_asv_table
+  - seqtab_stats_bind
+  - seqtab_stats_plot
 
 - title: CARD
   contents:

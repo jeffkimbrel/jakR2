@@ -4,6 +4,7 @@
 * methods for filtering based on min count and sample
 * methods for OTU clustering
 * some reusable regular expressions
+* some new functions to work with multiple seqtab objects (`seqtab_stats_bind` and `seqtab_stats_plot`)
 
 # jakR2 0.2
 
