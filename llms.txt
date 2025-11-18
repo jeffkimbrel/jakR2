@@ -1,0 +1,118 @@
+## Installation
+
+You can install the development version of jakR2 from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("pak")
+pak::pak("jeffkimbrel/jakR2")
+```
+
+# Package index
+
+## Genomics
+
+- [`read_orthogroups()`](https://jeffkimbrel.github.io/jakR2/reference/read_orthogroups.md)
+  : Import an orthofinder TSV file
+- [`orthogroup_list2counts()`](https://jeffkimbrel.github.io/jakR2/reference/orthogroup_list2counts.md)
+  : Convert an orthogroup list dataframe to a count dataframe
+
+## Diversity
+
+- [`get_alpha_diversity()`](https://jeffkimbrel.github.io/jakR2/reference/get_alpha_diversity.md)
+  : Alpha-Diversity Measures
+- [`get_alpha_S()`](https://jeffkimbrel.github.io/jakR2/reference/get_alpha_S.md)
+  : Calculate richness (S) and sample depth
+- [`get_alpha_simpson()`](https://jeffkimbrel.github.io/jakR2/reference/get_alpha_simpson.md)
+  : Calculate Simpson's diversity index and its evenness and inverse
+- [`get_alpha_shannon()`](https://jeffkimbrel.github.io/jakR2/reference/get_alpha_shannon.md)
+  : Calculate Shannon's diversity index and its evenness and effective
+  number of species (ENS)
+
+## Phlyogenetics
+
+- [`get_tip_index()`](https://jeffkimbrel.github.io/jakR2/reference/get_tip_index.md)
+  : Get the index of a tip in a tree
+- [`get_tip_edges()`](https://jeffkimbrel.github.io/jakR2/reference/get_tip_edges.md)
+  : Get the edges that lead to a tip
+
+## Markdown
+
+- [`file2gfm()`](https://jeffkimbrel.github.io/jakR2/reference/file2gfm.md)
+  : Decorate a file string for gfm markdown in Obsidian
+- [`obs2gfm()`](https://jeffkimbrel.github.io/jakR2/reference/obs2gfm.md)
+  : Decorate an Obsidian link for gfm markdown
+
+## Themes and Colors
+
+- [`jak_theme()`](https://jeffkimbrel.github.io/jakR2/reference/jak_theme.md)
+  : JAK ggplot theme
+- [`palette_jak()`](https://jeffkimbrel.github.io/jakR2/reference/palette_jak.md)
+  : A full-service color palette creator
+- [`blend_palette()`](https://jeffkimbrel.github.io/jakR2/reference/blend_palette.md)
+  : Blend palette with a color
+- [`scale_color_jak_d()`](https://jeffkimbrel.github.io/jakR2/reference/scale_color_jak_d.md)
+  : Custom discrete ggplot2 scale color
+- [`scale_fill_jak_d()`](https://jeffkimbrel.github.io/jakR2/reference/scale_fill_jak_d.md)
+  : Custom discrete ggplot2 scale fill
+- [`get_color_palette()`](https://jeffkimbrel.github.io/jakR2/reference/get_color_palette.md)
+  : Return table of colors for a palette
+- [`show_color_palette()`](https://jeffkimbrel.github.io/jakR2/reference/show_color_palette.md)
+  : showColorPalette
+- [`show_all_color_palettes()`](https://jeffkimbrel.github.io/jakR2/reference/show_all_color_palettes.md)
+  : Show all color palettes in the jak_palettes object
+- [`get_luminance()`](https://jeffkimbrel.github.io/jakR2/reference/get_luminance.md)
+  : Title
+- [`get_text_color()`](https://jeffkimbrel.github.io/jakR2/reference/get_text_color.md)
+  : Title
+
+## Amplicons and ASVs
+
+- [`seqtab_stats()`](https://jeffkimbrel.github.io/jakR2/reference/seqtab_stats.md)
+  : Extract DADA2 seqtab statistics
+- [`seqtab_to_ft()`](https://jeffkimbrel.github.io/jakR2/reference/seqtab_to_ft.md)
+  : Make ft object from DADA2 seqtab
+- [`ft()`](https://jeffkimbrel.github.io/jakR2/reference/ft.md) :
+  Feature table class
+- [`get_asv_table`](https://jeffkimbrel.github.io/jakR2/reference/get_asv_table.md)
+  : Return ASV table from ft object
+- [`get_sequences`](https://jeffkimbrel.github.io/jakR2/reference/get_sequences.md)
+  : Return DNAstring object from ft object
+- [`filter_asv_table`](https://jeffkimbrel.github.io/jakR2/reference/filter_asv_table.md)
+  : Filter an ft object by minimum count and sample
+- [`cluster_asv_table`](https://jeffkimbrel.github.io/jakR2/reference/cluster_asv_table.md)
+  : Cluster ASV sequences from ft object
+- [`seqtab_stats_bind()`](https://jeffkimbrel.github.io/jakR2/reference/seqtab_stats_bind.md)
+  : Stats of multiple seqtab objects
+- [`seqtab_stats_plot()`](https://jeffkimbrel.github.io/jakR2/reference/seqtab_stats_plot.md)
+  : Plot multiple seqtab objects
+
+## CARD
+
+- [`card_parse()`](https://jeffkimbrel.github.io/jakR2/reference/card_parse.md)
+  : Parse CARD database JSON file
+- [`card_ab_info()`](https://jeffkimbrel.github.io/jakR2/reference/card_ab_info.md)
+  : Get information about an antibiotic
+- [`card_gene_info()`](https://jeffkimbrel.github.io/jakR2/reference/card_gene_info.md)
+  : Get antibiotic information about a gene
+- [`card_gene2ab()`](https://jeffkimbrel.github.io/jakR2/reference/card_gene2ab.md)
+  : Get gene information about an antibiotic
+- [`card_ab2gene()`](https://jeffkimbrel.github.io/jakR2/reference/card_ab2gene.md)
+  : Get gene information about an antibiotic
+
+## fastq
+
+- [`fastq_info_summary()`](https://jeffkimbrel.github.io/jakR2/reference/fastq_info_summary.md)
+  : Summarize a fastq_info file
+- [`fastq_filter_summary_amplicon()`](https://jeffkimbrel.github.io/jakR2/reference/fastq_filter_summary_amplicon.md)
+  : Summarize a fastq_filter.py file in amplicon mode
+- [`fastq_filter_summary_meta()`](https://jeffkimbrel.github.io/jakR2/reference/fastq_filter_summary_meta.md)
+  : Summarize a fastq_filter.py file in metagenome mode
+
+## Utilities
+
+- [`get_package_info()`](https://jeffkimbrel.github.io/jakR2/reference/get_package_info.md)
+  : Package info utility
+- [`get_session_info()`](https://jeffkimbrel.github.io/jakR2/reference/get_session_info.md)
+  : Session info utility
+
