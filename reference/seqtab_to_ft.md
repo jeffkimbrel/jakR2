@@ -5,7 +5,7 @@ Make ft object from DADA2 seqtab
 ## Usage
 
 ``` r
-seqtab_to_ft(seqtab, clean = "_F_filt.fastq.gz")
+seqtab_to_ft(seqtab, clean = "_F_filt.fastq.gz", name = "ASV")
 ```
 
 ## Arguments
@@ -19,3 +19,8 @@ seqtab_to_ft(seqtab, clean = "_F_filt.fastq.gz")
 
   A string to remove from the sample names in the feature table (default
   is "\_F_filt.fastq.gz")
+
+- name:
+
+  (default: ASV) A string to use as a feature name. Include an
+  underscore (or other separator) if desired
