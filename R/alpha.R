@@ -17,7 +17,7 @@ get_alpha_diversity = function (p, id_col = "SAMPLE") {
 
   p = phyloseq::filter_taxa(p, function(x) sum(x >= 1) >= (1), TRUE)
 
-  df = otu_table(p) |>
+  df = phyloseq::otu_table(p) |>
     as.data.frame() |>
     tibble::rownames_to_column("feature_id") |>
     tibble::as_tibble()
@@ -26,18 +26,18 @@ get_alpha_diversity = function (p, id_col = "SAMPLE") {
   SIMPSON = get_alpha_simpson(df, feature_id = "feature_id", id_col = id_col)
   SHANNON = get_alpha_shannon(df, feature_id = "feature_id", id_col = id_col)
 
-  sample_data = data.frame(sample_data(p))
+  sample_data = data.frame(phyloseq::sample_data(p))
 
-  if (id_col %in% colnames(data.frame(sample_data(p)))) {
+  if (id_col %in% colnames(data.frame(phyloseq::sample_data(p)))) {
 
     orig_name = paste(id_col, "orig", sep = "_")
 
-    sample_data = data.frame(sample_data(p)) |>
+    sample_data = data.frame(phyloseq::sample_data(p)) |>
       dplyr::rename(!!as.name(orig_name) := id_col) |>
       tibble::rownames_to_column(id_col) |>
       tibble::as_tibble()
   } else {
-    sample_data = data.frame(sample_data(p)) |>
+    sample_data = data.frame(phyloseq::sample_data(p)) |>
       tibble::rownames_to_column(id_col) |>
       tibble::as_tibble()
   }
@@ -91,6 +91,8 @@ get_alpha_S = function(df, feature_id = "feature_id", id_col = "SAMPLE") {
 
 get_alpha_simpson = function(df, feature_id = "feature_id", id_col = "SAMPLE") {
 
+  S = get_alpha_S(df, feature_id = feature_id, id_col = id_col)
+
   df |>
     tidyr::pivot_longer(cols = -{{feature_id}}, names_to = id_col, values_to = "ABUNDANCE") |>
     dplyr::group_by_at(id_col) |>
@@ -116,7 +118,7 @@ get_alpha_simpson = function(df, feature_id = "feature_id", id_col = "SAMPLE") {
 
 get_alpha_shannon = function(df, feature_id = "feature_id", id_col = "SAMPLE") {
 
-  S = get_alpha_S(df, id_col = id_col)
+  S = get_alpha_S(df, feature_id = feature_id, id_col = id_col)
 
   df |>
     tidyr::pivot_longer(cols = -{{feature_id}}, names_to = id_col, values_to = "ABUNDANCE") |>

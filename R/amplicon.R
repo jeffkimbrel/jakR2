@@ -104,7 +104,7 @@ seqtab_stats_plot = function(...) {
     ) |> #
     ggplot2::ggplot(ggplot2::aes(x = LENGTH, y = VALUE, fill = STEP)) +
       ggplot2::geom_col(position = "dodge") +
-      ggplot2::scale_fill_manual(values = palette_jak(n = 2, p = "bay")) +
+      scale_fill_jak_d() +
       ggplot2::facet_wrap(~METRIC, scales = "free_y", ncol = 1) +
       ggplot2::scale_y_continuous(labels=function(x) format(x, big.mark = ",", decimal.mark = ".", scientific = FALSE)) +
       ggplot2::labs(x = "ASV Length", y = "ASV Count", title = "ASV frequency and abundance by length")

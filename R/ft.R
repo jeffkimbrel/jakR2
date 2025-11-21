@@ -2,16 +2,19 @@
 #'
 #' @param seqtab A DADA2 sequence table (matrix) with ASVs as columns and samples as rows
 #' @param clean A string to remove from the sample names in the feature table (default is "_F_filt.fastq.gz")
+#' @param name (default: ASV) A string to use as a feature name. Include an underscore (or other separator) if desired
 #'
 #' @export
 
-seqtab_to_ft <- function(seqtab, clean = "_F_filt.fastq.gz") {
+seqtab_to_ft <- function(seqtab,
+                         clean = "_F_filt.fastq.gz",
+                         name = "ASV") {
   feature_table <- phyloseq::otu_table(seqtab, taxa_are_rows = FALSE) |>
     t() |>
     as.data.frame() |>
     tibble::rownames_to_column("SEQUENCE") |>
     tibble::as_tibble() |>
-    dplyr::mutate(ASV = paste0("ASV", seq(dplyr::n()))) |>
+    dplyr::mutate(ASV = paste0(name, seq(dplyr::n()))) |>
     dplyr::select(ASV, tidyselect::everything())
 
   names(feature_table) <- gsub(clean, "", names(feature_table))
