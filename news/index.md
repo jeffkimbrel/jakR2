@@ -9,6 +9,9 @@
 - some new functions to work with multiple seqtab objects
   (`seqtab_stats_bind` and `seqtab_stats_plot`)
 - better feature naming options for `ft` objects
+- new
+  [`obs_callout()`](https://jeffkimbrel.github.io/jakR2/reference/obs_callout.md)
+  function
 
 ## jakR2 0.2
 

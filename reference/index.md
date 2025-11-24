@@ -32,6 +32,8 @@
   : Decorate a file string for gfm markdown in Obsidian
 - [`obs2gfm()`](https://jeffkimbrel.github.io/jakR2/reference/obs2gfm.md)
   : Decorate an Obsidian link for gfm markdown
+- [`obs_callout()`](https://jeffkimbrel.github.io/jakR2/reference/obs_callout.md)
+  : Obsidian callout
 
 ## Themes and Colors
 
