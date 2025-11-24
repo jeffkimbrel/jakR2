@@ -69,3 +69,55 @@ file2gfm <- function(file,
     .close = "}}"
   )
 }
+
+
+
+
+#' Obsidian callout
+#'
+#' Obisidan callouts can be one of many types. If a header line is not given,
+#' then the header defaults to the name of the type. Text for an optional body
+#' can also be provided.
+#'
+#' @param type The type of callout
+#' @param header text to put in the header line
+#' @param body text to put in the body
+#'
+#' @export
+
+obs_callout = function(type = "info", header = "", body = "") {
+
+  allowed_types = c("note",
+                    "abstract", "summary", "tldr",
+                    "info",
+                    "todo",
+                    "tip", "hint", "important",
+                    "success", "check", "done",
+                    "question", "help", "faq",
+                    "warning", "caution", "attention",
+                    "failure", "fail", "missing",
+                    "danger", "error",
+                    "bug",
+                    "example", "quote")
+
+
+  # if link contains "|" give error to reformat and use text argument
+  stopifnot("<type> is not one of the allowed types" = type %in% allowed_types)
+
+  if (body == "") {
+   glue::glue("`> [!{{type}}] {{header}}`{=gfm}",
+     .open = "{{",
+     .close = "}}"
+   )
+ } else {
+   glue::glue("```{=gfm}
+              > [!{{type}}] {{header}}
+              > {{body}}
+              ```",
+     .open = "{{",
+     .close = "}}"
+   )
+ }
+
+
+}
