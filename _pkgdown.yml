@@ -26,6 +26,7 @@ reference:
   contents:
   - file2gfm
   - obs2gfm
+  - obs_callout
 
 - title: Themes and Colors
   contents:
