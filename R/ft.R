@@ -190,7 +190,7 @@ S7::method(cluster_asv_table, ft) <- function(x, id = 0.99, nproc = 1, quiet = T
     processors = nproc,
     verbose = verbose
   )
-  clusters <- DECIPHER::TreeLine(
+  clusters <- DECIPHER::Treeline(
     myDistMatrix = d,
     method = "complete",
     cutoff = 1 - id,
