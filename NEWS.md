@@ -1,5 +1,3 @@
-# jakR2 0.3.11
-
 # jakR2 0.3
 
 * A new `S7` object called `ft` to hold feature tables
@@ -9,6 +7,7 @@
 * some new functions to work with multiple seqtab objects (`seqtab_stats_bind` and `seqtab_stats_plot`)
 * better feature naming options for `ft` objects
 * new `obs_callout()` function
+* split `jak_theme()` into 6 smaller functions, with `jak_theme()` now being a wrapper around them
 
 # jakR2 0.2
 
