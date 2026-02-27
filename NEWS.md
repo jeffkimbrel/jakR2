@@ -1,3 +1,5 @@
+# jakR2 0.3.11
+
 # jakR2 0.3
 
 * A new `S7` object called `ft` to hold feature tables

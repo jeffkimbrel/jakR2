@@ -92,6 +92,7 @@ filter_asv_table <- S7::new_generic("filter_asv_table", "x")
 #' @name filter_asv_table
 
 S7::method(filter_asv_table, ft) <- function(x, min_count = 2, min_sample = 2) {
+
   # min_count should be a positive integer
   if (!is.numeric(min_count) || min_count < 1 || min_count != round(min_count)) {
     stop("<min_count> must be a positive integer", call. = F)

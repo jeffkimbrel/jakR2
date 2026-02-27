@@ -31,6 +31,12 @@ reference:
 - title: Themes and Colors
   contents:
   - jak_theme
+  - jak_color
+  - jak_grid
+  - jak_legend
+  - jak_strips
+  - jak_text
+  - jak_transparent
   - palette_jak
   - blend_palette
   - scale_color_jak_d

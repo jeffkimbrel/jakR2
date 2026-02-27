@@ -2,7 +2,7 @@
 % Please edit documentation in R/themes.R
 \name{jak_theme}
 \alias{jak_theme}
-\title{JAK ggplot theme}
+\title{Complete JAK theme}
 \usage{
 jak_theme(
   base_size = 10,
@@ -11,9 +11,9 @@ jak_theme(
   base_color = "gray30",
   plot_title_color = "gray30",
   axis_title_color = "gray30",
-  bg_color = "transparent",
-  grid_color = "gray80",
+  grid_color = "transparent",
   border_width = 0.5,
+  outline_color = base_color,
   strip_size = 10,
   strip_color = "transparent",
   strip_line = 0,
@@ -23,34 +23,43 @@ jak_theme(
 )
 }
 \arguments{
-\item{base_size}{Font size for most things}
+\item{base_size}{Base font size. Default \code{10}.}
 
-\item{plot_title_size}{Font size for plot titles}
+\item{plot_title_size}{Plot title font size. Default \code{12}.}
 
-\item{axis_title_size}{Font size for axis titles}
+\item{axis_title_size}{Axis title font size. Default \code{11}.}
 
-\item{base_color}{Color for most text and lines}
+\item{base_color}{Base color for text and borders. Default \code{"gray30"}.}
 
-\item{plot_title_color}{Color for plot titles}
+\item{plot_title_color}{Color for plot title. Default \code{"gray30"}.}
 
-\item{axis_title_color}{Color for axis titles}
+\item{axis_title_color}{Color for axis titles. Default \code{"gray30"}.}
 
-\item{bg_color}{background color}
+\item{grid_color}{Color for major grid lines. Default \code{"transparent"} (no grid).}
 
-\item{grid_color}{Color for grid lines}
+\item{border_width}{Panel border line width. Default \code{0.5}.}
 
-\item{strip_size}{Font size for facet strip titles}
+\item{outline_color}{Default outline/border color for filled geom shapes (pch 21-25).
+Default \code{"gray70"}.}
 
-\item{strip_color}{Color for facet strip titles}
+\item{strip_size}{Font size for strip text. Default \code{10}.}
 
-\item{strip_line}{Line width for facet strip titles}
+\item{strip_color}{Background fill color for strip text boxes. Default \code{"transparent"}.}
 
-\item{legend_size}{Font size for legend}
+\item{strip_line}{Border line width for strip text boxes. Default \code{0}.}
 
-\item{legend_position}{Position of legend}
+\item{legend_size}{Font size for legend text and title. Default \code{10}.}
 
-\item{base_family}{Font family}
+\item{legend_position}{Legend position. One of \code{"bottom"}, \code{"top"}, \code{"left"},
+\code{"right"}, or \code{"none"}. Default \code{"bottom"}.}
+
+\item{base_family}{Base font family. Default \code{""} (system default).}
+}
+\value{
+A ggplot2 theme object
 }
 \description{
-Modify theme of ggplots
+A complete ggplot2 theme that combines \code{\link[=jak_transparent]{jak_transparent()}}, \code{\link[=jak_color]{jak_color()}},
+\code{\link[=jak_text]{jak_text()}}, \code{\link[=jak_grid]{jak_grid()}}, \code{\link[=jak_legend]{jak_legend()}}, and \code{\link[=jak_strips]{jak_strips()}} into a single
+convenience wrapper. Built on top of \code{\link[ggplot2:ggtheme]{ggplot2::theme_bw()}}.
 }
