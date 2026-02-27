@@ -1,6 +1,15 @@
-# JAK ggplot theme
+# Complete JAK theme
 
-Modify theme of ggplots
+A complete ggplot2 theme that combines
+[`jak_transparent()`](https://jeffkimbrel.github.io/jakR2/reference/jak_transparent.md),
+[`jak_color()`](https://jeffkimbrel.github.io/jakR2/reference/jak_color.md),
+[`jak_text()`](https://jeffkimbrel.github.io/jakR2/reference/jak_text.md),
+[`jak_grid()`](https://jeffkimbrel.github.io/jakR2/reference/jak_grid.md),
+[`jak_legend()`](https://jeffkimbrel.github.io/jakR2/reference/jak_legend.md),
+and
+[`jak_strips()`](https://jeffkimbrel.github.io/jakR2/reference/jak_strips.md)
+into a single convenience wrapper. Built on top of
+[`ggplot2::theme_bw()`](https://ggplot2.tidyverse.org/reference/ggtheme.html).
 
 ## Usage
 
@@ -12,9 +21,9 @@ jak_theme(
   base_color = "gray30",
   plot_title_color = "gray30",
   axis_title_color = "gray30",
-  bg_color = "transparent",
-  grid_color = "gray80",
+  grid_color = "transparent",
   border_width = 0.5,
+  outline_color = base_color,
   strip_size = 10,
   strip_color = "transparent",
   strip_line = 0,
@@ -28,56 +37,66 @@ jak_theme(
 
 - base_size:
 
-  Font size for most things
+  Base font size. Default `10`.
 
 - plot_title_size:
 
-  Font size for plot titles
+  Plot title font size. Default `12`.
 
 - axis_title_size:
 
-  Font size for axis titles
+  Axis title font size. Default `11`.
 
 - base_color:
 
-  Color for most text and lines
+  Base color for text and borders. Default `"gray30"`.
 
 - plot_title_color:
 
-  Color for plot titles
+  Color for plot title. Default `"gray30"`.
 
 - axis_title_color:
 
-  Color for axis titles
-
-- bg_color:
-
-  background color
+  Color for axis titles. Default `"gray30"`.
 
 - grid_color:
 
-  Color for grid lines
+  Color for major grid lines. Default `"transparent"` (no grid).
+
+- border_width:
+
+  Panel border line width. Default `0.5`.
+
+- outline_color:
+
+  Default outline/border color for filled geom shapes (pch 21-25).
+  Default `"gray70"`.
 
 - strip_size:
 
-  Font size for facet strip titles
+  Font size for strip text. Default `10`.
 
 - strip_color:
 
-  Color for facet strip titles
+  Background fill color for strip text boxes. Default `"transparent"`.
 
 - strip_line:
 
-  Line width for facet strip titles
+  Border line width for strip text boxes. Default `0`.
 
 - legend_size:
 
-  Font size for legend
+  Font size for legend text and title. Default `10`.
 
 - legend_position:
 
-  Position of legend
+  Legend position. One of `"bottom"`, `"top"`, `"left"`, `"right"`, or
+  `"none"`. Default `"bottom"`.
 
 - base_family:
 
-  Font family
+  Base font family. Default `""` (system default).
+
+## Value
+
+A ggplot2 theme object

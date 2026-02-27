@@ -48,7 +48,19 @@ pak::pak("jeffkimbrel/jakR2")
 ## Themes and Colors
 
 - [`jak_theme()`](https://jeffkimbrel.github.io/jakR2/reference/jak_theme.md)
-  : JAK ggplot theme
+  : Complete JAK theme
+- [`jak_color()`](https://jeffkimbrel.github.io/jakR2/reference/jak_color.md)
+  : Color defaults
+- [`jak_grid()`](https://jeffkimbrel.github.io/jakR2/reference/jak_grid.md)
+  : Grid lines
+- [`jak_legend()`](https://jeffkimbrel.github.io/jakR2/reference/jak_legend.md)
+  : Legend styling
+- [`jak_strips()`](https://jeffkimbrel.github.io/jakR2/reference/jak_strips.md)
+  : Strip text styling
+- [`jak_text()`](https://jeffkimbrel.github.io/jakR2/reference/jak_text.md)
+  : Text sizes and styles
+- [`jak_transparent()`](https://jeffkimbrel.github.io/jakR2/reference/jak_transparent.md)
+  : Transparent backgrounds
 - [`palette_jak()`](https://jeffkimbrel.github.io/jakR2/reference/palette_jak.md)
   : A full-service color palette creator
 - [`blend_palette()`](https://jeffkimbrel.github.io/jakR2/reference/blend_palette.md)

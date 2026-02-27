@@ -12,6 +12,11 @@
 - new
   [`obs_callout()`](https://jeffkimbrel.github.io/jakR2/reference/obs_callout.md)
   function
+- split
+  [`jak_theme()`](https://jeffkimbrel.github.io/jakR2/reference/jak_theme.md)
+  into 6 smaller functions, with
+  [`jak_theme()`](https://jeffkimbrel.github.io/jakR2/reference/jak_theme.md)
+  now being a wrapper around them
 
 ## jakR2 0.2
 
