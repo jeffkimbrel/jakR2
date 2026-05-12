@@ -20,8 +20,10 @@ test_that("<colors> work right", {
 })
 
 test_that("<colors> overwrites <p>", {
-  expect_equal(scale_color_jak_d(p = "bay", colors = "black")$palette(3),
-               scale_color_jak_d(p = "helpcenter", colors = "black")$palette(3))
+  expect_equal(
+    scale_color_jak_d(p = "bay", colors = "black")$palette(3),
+    scale_color_jak_d(p = "helpcenter", colors = "black")$palette(3)
+  )
 })
 
 test_that("<order> works right", {

@@ -2,17 +2,48 @@
 % Please edit documentation in R/alpha.R
 \name{get_alpha_simpson}
 \alias{get_alpha_simpson}
-\title{Calculate Simpson's diversity index and its evenness and inverse}
+\title{Calculate Simpson's diversity, Gini-Simpson index, ENS, and evenness}
 \usage{
 get_alpha_simpson(df, feature_id = "feature_id", id_col = "SAMPLE")
 }
 \arguments{
 \item{df}{A dataframe with features as rows and samples as columns}
 
-\item{feature_id}{The name of the column with feature IDs (default is "feature_id")}
+\item{feature_id}{The name of the column with feature IDs
+(default is "feature_id")}
 
 \item{id_col}{The name of the column with sample IDs (default is "SAMPLE")}
 }
-\description{
-Calculate Simpson's diversity index and its evenness and inverse
+\value{
+A tibble with one row per sample and columns:
+\describe{
+\item{SIMPSON_D}{Simpson's dominance index (sum of squared proportions);
+lower = more diverse}
+\item{GINI_SIMPSON}{Gini-Simpson index (1 - D); a diversity index,
+not evenness}
+\item{SIMPSON_ENS}{Effective number of species (1 / D); the q=2 Hill
+number; interpretable as the number of equally abundant dominant
+species that would yield the same D}
+\item{SIMPSON_ENS_EVENNESS}{ENS-based evenness (SIMPSON_ENS / S.obs);
+ranges from 1/S.obs (single dominant) to 1 (all species equal)}
 }
+}
+\description{
+Computes four related measures from Simpson's D (sum of squared relative
+abundances). Note that \code{GINI_SIMPSON} (1 - D) is a diversity index, not an
+evenness measure — it is the probability that two randomly drawn
+individuals belong to different species. True evenness is derived from the
+number of species (\code{SIMPSON_ENS}).
+}
+\section{Breaking changes}{
+
+\describe{
+\item{SIMPSON_EVENNESS}{Previously \code{1 - SIMPSON_D} (Gini-Simpson index).
+Renamed to \code{GINI_SIMPSON}. The name \code{SIMPSON_EVENNESS} is no longer
+returned — old workflows using it will error rather than silently
+return wrong values.}
+\item{SIMPSON_INVERSE}{Renamed to \code{SIMPSON_ENS}. Old workflows using
+\code{SIMPSON_INVERSE} will error.}
+}
+}
+

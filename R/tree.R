@@ -7,13 +7,12 @@
 #'
 #' @returns A integer index of the tip label
 
-get_tip_index = function(tip, tree) {
-
+get_tip_index <- function(tip, tree) {
   # make sure <tree> is a phylo tree object
   stopifnot("<tree> doesn't seem to be a phylo object" = inherits(tree, "phylo"))
 
   # make sure the given tip name is in the tree
-  not_found = setdiff(tip, tree$tip.label)
+  not_found <- setdiff(tip, tree$tip.label)
   if (length(not_found) > 0) {
     stop(paste("The following tip labels were not found in the tree:", paste(not_found, collapse = ", ")), call. = F)
   }
@@ -21,8 +20,6 @@ get_tip_index = function(tip, tree) {
 
   return(which(tree$tip.label %in% tip))
 }
-
-
 
 
 #' Get the edges that lead to a tip
@@ -34,7 +31,6 @@ get_tip_index = function(tip, tree) {
 #' @export
 
 get_tip_edges <- function(tip_index, tree, type = "edges") {
-
   current_node <- tip_index
   edge_indices <- numeric()
 

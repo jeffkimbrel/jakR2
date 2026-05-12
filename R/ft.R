@@ -29,7 +29,10 @@ seqtab_to_ft <- function(seqtab,
 #' along with optional clustering information and filtering parameters.
 #'
 #' @param table A data frame containing the feature table with ASVs and sequences.
+#' @param clusters A data frame containing cluster assignments, populated by [cluster_asv_table()].
+#' @param filter A list containing filtering parameters applied to the table, populated by [filter_asv_table()].
 #'
+#' @usage NULL
 #' @export
 
 
@@ -92,7 +95,6 @@ filter_asv_table <- S7::new_generic("filter_asv_table", "x")
 #' @name filter_asv_table
 
 S7::method(filter_asv_table, ft) <- function(x, min_count = 2, min_sample = 2) {
-
   # min_count should be a positive integer
   if (!is.numeric(min_count) || min_count < 1 || min_count != round(min_count)) {
     stop("<min_count> must be a positive integer", call. = F)
@@ -142,8 +144,6 @@ S7::method(filter_asv_table, ft) <- function(x, min_count = 2, min_sample = 2) {
 }
 
 
-
-
 cluster_asv_table <- S7::new_generic("cluster_asv_table", "x")
 
 #' Cluster ASV sequences from ft object
@@ -157,11 +157,10 @@ cluster_asv_table <- S7::new_generic("cluster_asv_table", "x")
 #' @name cluster_asv_table
 
 S7::method(cluster_asv_table, ft) <- function(x, id = 0.99, nproc = 1, quiet = TRUE) {
-
   if (!quiet) {
-    verbose = TRUE
+    verbose <- TRUE
   } else {
-    verbose = FALSE
+    verbose <- FALSE
   }
 
   # id should be a numeric value between 0 and 1

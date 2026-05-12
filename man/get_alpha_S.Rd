@@ -9,10 +9,24 @@ get_alpha_S(df, feature_id = "feature_id", id_col = "SAMPLE")
 \arguments{
 \item{df}{A dataframe with features as rows and samples as columns}
 
-\item{feature_id}{The name of the column with feature IDs (default is "feature_id")}
+\item{feature_id}{The name of the column with feature IDs
+(default is "feature_id")}
 
 \item{id_col}{The name of the column with sample IDs (default is "SAMPLE")}
 }
+\value{
+A tibble with one row per sample and columns:
+\describe{
+\item{sample_sum}{Total read count (sequencing depth)}
+\item{S.obs}{Observed species richness}
+\item{S.chao1}{Chao1 richness estimator}
+\item{se.chao1}{Standard error of Chao1}
+\item{S.ACE}{ACE richness estimator}
+\item{se.ACE}{Standard error of ACE}
+}
+}
 \description{
-Calculate richness (S) and sample depth
+Observed richness is counted directly; Chao1 and ACE are extrapolated
+estimators of true richness based on the frequency of rare species. All
+three are returned so downstream code can choose the appropriate measure.
 }

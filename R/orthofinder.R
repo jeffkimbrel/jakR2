@@ -68,7 +68,6 @@ read_orthogroups <- function(file,
   }
 
 
-
   if (quiet == F) {
     message(glue::glue_col("{green {basename(file)} contains {nrow(orthogroups)} orthogroups across {ncol(orthogroups) - 1} genomes}"))
   }
@@ -89,7 +88,6 @@ read_orthogroups <- function(file,
 #' @export
 
 orthogroup_list2counts <- function(orthogroups, verify = F) {
-
   GENE <- GENOME <- L <- NULL
 
   #
@@ -119,6 +117,3 @@ orthogroup_list2counts <- function(orthogroups, verify = F) {
     }
   }
 }
-
-
-

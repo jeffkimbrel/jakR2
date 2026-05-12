@@ -11,13 +11,17 @@ get_alpha_diversity(p, id_col = "SAMPLE")
 
 \item{id_col}{The name of the column with sample IDs}
 }
+\value{
+A tibble joining sample metadata with columns from \code{\link[=get_alpha_S]{get_alpha_S()}},
+\code{\link[=get_alpha_simpson]{get_alpha_simpson()}}, and \code{\link[=get_alpha_shannon]{get_alpha_shannon()}}.
+}
 \description{
-An extension of the phyloseq \code{estimate_richness()} function to include Shannon's
-Evenness and sample depth. It also combines the normal estimate_richness output
-with the sample data dataframe.
+An extension of the phyloseq \code{estimate_richness()} function to include
+Shannon's Evenness and sample depth. It also combines the normal
+estimate_richness output with the sample data dataframe.
 }
 \details{
-Although this new version removes much of the phyloseq code, running them instead
-in Vegan or calculating manually, it does still require \code{phyloseq} from bioconductor,
-which is not automatically installed with \code{jakR2} installation.
+Although this new version removes much of the phyloseq code, running them
+instead in Vegan or calculating manually, it does still require \code{phyloseq}
+from bioconductor, which is not automatically installed with \code{jakR2}.
 }

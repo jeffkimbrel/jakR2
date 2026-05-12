@@ -1,5 +1,5 @@
-o_list = read_orthogroups(test_path("fixtures", "Orthogroups.tsv"), type = "list", quiet = T)
-o_counts = read_orthogroups(test_path("fixtures", "Orthogroups.tsv"), type = "counts", quiet = T)
+o_list <- read_orthogroups(test_path("fixtures", "Orthogroups.tsv"), type = "list", quiet = T)
+o_counts <- read_orthogroups(test_path("fixtures", "Orthogroups.tsv"), type = "counts", quiet = T)
 
 test_that("converts list to counts correctly", {
   expect_equal(orthogroup_list2counts(o_list), o_counts)

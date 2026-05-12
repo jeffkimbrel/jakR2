@@ -32,11 +32,11 @@ jak_transparent <- function() {
 #' @return A ggplot2 theme object
 #' @export
 jak_color <- function(
-    base_color       = "gray30",
-    plot_title_color = "gray30",
-    axis_title_color = "gray30",
-    border_width     = 0.5,
-    outline_color    = base_color
+  base_color = "gray30",
+  plot_title_color = "gray30",
+  axis_title_color = "gray30",
+  border_width = 0.5,
+  outline_color = base_color
 ) {
   ggplot2::theme(
     text         = ggplot2::element_text(color = base_color),
@@ -63,10 +63,10 @@ jak_color <- function(
 #' @return A ggplot2 theme object
 #' @export
 jak_text <- function(
-    base_size        = 10,
-    plot_title_size  = 12,
-    axis_title_size  = 11,
-    base_family      = ""
+  base_size = 10,
+  plot_title_size = 12,
+  axis_title_size = 11,
+  base_family = ""
 ) {
   ggplot2::theme(
     text         = ggplot2::element_text(size = base_size, family = base_family),
@@ -87,8 +87,8 @@ jak_text <- function(
 #' @return A ggplot2 theme object
 #' @export
 jak_grid <- function(
-    grid_color   = "transparent",
-    border_width = 0.5
+  grid_color = "transparent",
+  border_width = 0.5
 ) {
   ggplot2::theme(
     panel.grid.major = ggplot2::element_line(color = grid_color, linewidth = 0.2),
@@ -107,8 +107,8 @@ jak_grid <- function(
 #' @return A ggplot2 theme object
 #' @export
 jak_legend <- function(
-    legend_position = "bottom",
-    legend_size     = 10
+  legend_position = "bottom",
+  legend_size = 10
 ) {
   ggplot2::theme(
     legend.position = legend_position,
@@ -129,23 +129,23 @@ jak_legend <- function(
 #' @return A ggplot2 theme object
 #' @export
 jak_strips <- function(
-    strip_size  = 10,
-    strip_color = "transparent",
-    strip_line  = 0,
-    base_color  = "gray30"
+  strip_size = 10,
+  strip_color = "transparent",
+  strip_line = 0,
+  base_color = "gray30"
 ) {
   ggplot2::theme(
     strip.background = ggplot2::element_blank(),
     strip.text.x = ggtext::element_textbox(
-      size    = strip_size, color = base_color, fill = strip_color,
-      width   = ggplot2::unit(1, "npc"), halign = 0.5, linetype = 1,
-      r       = ggplot2::unit(3, "pt"), linewidth = strip_line,
+      size = strip_size, color = base_color, fill = strip_color,
+      width = ggplot2::unit(1, "npc"), halign = 0.5, linetype = 1,
+      r = ggplot2::unit(3, "pt"), linewidth = strip_line,
       padding = ggplot2::margin(2, 0, 1, 0), margin = ggplot2::margin(2, 2, 2, 2)
     ),
     strip.text.y = ggtext::element_textbox(
-      size    = strip_size, color = base_color, fill = strip_color,
-      halign  = 0.5, linetype = 1, r = ggplot2::unit(3, "pt"), linewidth = strip_line,
-      hjust   = 0, padding = ggplot2::margin(4, 0, 1, 0), margin = ggplot2::margin(2, 2, 2, 2)
+      size = strip_size, color = base_color, fill = strip_color,
+      halign = 0.5, linetype = 1, r = ggplot2::unit(3, "pt"), linewidth = strip_line,
+      hjust = 0, padding = ggplot2::margin(4, 0, 1, 0), margin = ggplot2::margin(2, 2, 2, 2)
     )
   )
 }
@@ -165,21 +165,21 @@ jak_strips <- function(
 #' @return A ggplot2 theme object
 #' @export
 jak_theme <- function(
-    base_size        = 10,
-    plot_title_size  = 12,
-    axis_title_size  = 11,
-    base_color       = "gray30",
-    plot_title_color = "gray30",
-    axis_title_color = "gray30",
-    grid_color       = "transparent",
-    border_width     = 0.5,
-    outline_color    = base_color,
-    strip_size       = 10,
-    strip_color      = "transparent",
-    strip_line       = 0,
-    legend_size      = 10,
-    legend_position  = "bottom",
-    base_family      = ""
+  base_size = 10,
+  plot_title_size = 12,
+  axis_title_size = 11,
+  base_color = "gray30",
+  plot_title_color = "gray30",
+  axis_title_color = "gray30",
+  grid_color = "transparent",
+  border_width = 0.5,
+  outline_color = base_color,
+  strip_size = 10,
+  strip_color = "transparent",
+  strip_line = 0,
+  legend_size = 10,
+  legend_position = "bottom",
+  base_family = ""
 ) {
   ggplot2::theme_bw(base_size = base_size, base_family = base_family) +
     jak_transparent() +
@@ -189,9 +189,6 @@ jak_theme <- function(
     jak_legend(legend_position, legend_size) +
     jak_strips(strip_size, strip_color, strip_line, base_color)
 }
-
-
-
 
 
 #' Custom discrete ggplot2 scale color
@@ -205,7 +202,6 @@ jak_theme <- function(
 scale_color_jak_d <- function(p = "bay",
                               colors = NULL,
                               order = "default") {
-
   # p must be in the names of jak_palettes
   if (!p %in% names(jak_palettes)) {
     stop(paste0("'", p, "' is not a known palette name"))
@@ -245,7 +241,6 @@ scale_color_jak_d <- function(p = "bay",
 
 
 scale_fill_jak_d <- function(p = "bay", colors = NULL, order = "default") {
-
   # p must be in the names of jak_palettes
   if (!p %in% names(jak_palettes)) {
     stop(paste0("'", p, "' is not a known palette name"))

@@ -6,7 +6,6 @@
 #' @export
 
 fastq_info_summary <- function(file, fill = "cornflowerblue") {
-
   if (!file.exists(file)) {
     stop("The file does not exist: ", file)
   }
@@ -78,8 +77,10 @@ fastq_info_summary <- function(file, fill = "cornflowerblue") {
     dplyr::mutate(DIFF_FROM_MEAN = TOTAL_READS - mean(TOTAL_READS)) |>
     ggplot2::ggplot(ggplot2::aes(x = TOTAL_READS)) +
     ggplot2::geom_histogram(bins = ceiling(sample_count / 10), fill = fill) +
-    ggplot2::labs(x = "Total Reads (log10)",
-                  y = "Count of Samples") +
+    ggplot2::labs(
+      x = "Total Reads (log10)",
+      y = "Count of Samples"
+    ) +
     ggplot2::scale_x_continuous(labels = function(x) format(x, big.mark = ",", decimal.mark = ".", scientific = FALSE), trans = "log10")
 
 
@@ -89,10 +90,7 @@ fastq_info_summary <- function(file, fill = "cornflowerblue") {
     "pairs" = pair_count_match,
     "plot" = p
   )
-
 }
-
-
 
 
 #' Summarize a fastq_filter.py file in amplicon mode
@@ -119,7 +117,6 @@ fastq_filter_summary_amplicon <- function(file) {
     ggplot2::scale_y_continuous(labels = function(x) format(x, big.mark = ",", decimal.mark = ".", scientific = FALSE))
 
 
-
   b <- df |>
     tidyr::separate(name, into = c("FILTER", "TYPE", "STEP")) |>
     dplyr::select(-FILTER) |>
@@ -131,8 +128,10 @@ fastq_filter_summary_amplicon <- function(file) {
     ggplot2::facet_wrap(~TYPE, scales = "free_y", ncol = 1) +
     ggplot2::scale_fill_viridis_c() +
     ggplot2::labs(x = "Sample", y = "Reads Removed (%)") +
-    ggplot2::theme(panel.grid.major = ggplot2::element_line(color = NA),
-                   legend.position = "none")
+    ggplot2::theme(
+      panel.grid.major = ggplot2::element_line(color = NA),
+      legend.position = "none"
+    )
 
   df_final <- df |>
     tidyr::pivot_wider(names_from = name, values_from = value)
@@ -160,7 +159,7 @@ fastq_filter_summary_meta <- function(file) {
     ggplot2::ggplot(ggplot2::aes(x = STEP, y = value, fill = RESULT)) +
     ggplot2::geom_col() +
     ggplot2::facet_wrap(TYPE ~ SAMPLE, scales = "free_y") +
-    #jakR::jak_theme() +
+    # jakR::jak_theme() +
     ggplot2::scale_y_log10() +
     ggplot2::scale_fill_manual(values = c("OUT" = "gray30", "REMOVED" = "orange"))
 
@@ -174,7 +173,7 @@ fastq_filter_summary_meta <- function(file) {
     ggplot2::ggplot(ggplot2::aes(x = STEP, y = value, fill = RESULT)) +
     ggplot2::geom_col() +
     ggplot2::facet_wrap(TYPE ~ SAMPLE, scales = "free_y") +
-    #jakR::jak_theme() +
+    # jakR::jak_theme() +
     ggplot2::scale_y_log10() +
     ggplot2::scale_fill_manual(values = c("OUT" = "gray30", "REMOVED" = "orange"))
 

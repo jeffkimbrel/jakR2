@@ -3,41 +3,12 @@
 \name{ft}
 \alias{ft}
 \title{Feature table class}
-\usage{
-ft(
-  table = (function (.data = list(), row.names = NULL) 
- {
-     if (is.null(row.names))
-    {
-         list2DF(.data)
-     }
-     else {
-         out <- list2DF(.data,
-    length(row.names))
-         attr(out, "row.names") <- row.names
-         out
-     }
-
-    })(),
-  clusters = (function (.data = list(), row.names = NULL) 
- {
-     if
-    (is.null(row.names)) {
-         list2DF(.data)
-     }
-     else {
-         out <-
-    list2DF(.data, length(row.names))
-         attr(out, "row.names") <- row.names
-      
-      out
-     }
- })(),
-  filter = list()
-)
-}
 \arguments{
 \item{table}{A data frame containing the feature table with ASVs and sequences.}
+
+\item{clusters}{A data frame containing cluster assignments, populated by \code{\link[=cluster_asv_table]{cluster_asv_table()}}.}
+
+\item{filter}{A list containing filtering parameters applied to the table, populated by \code{\link[=filter_asv_table]{filter_asv_table()}}.}
 }
 \description{
 This class represents a feature table (ft) object, which contains a table of ASVs and their sequences,

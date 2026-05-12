@@ -17,8 +17,6 @@ get_session_info <- function() {
 }
 
 
-
-
 #' Package info utility
 #'
 #' @param attached Logical, whether to return only attached packages (default is TRUE)
@@ -26,7 +24,6 @@ get_session_info <- function() {
 #' @export
 
 get_package_info <- function(attached = TRUE) {
-
   # attached must be true/false
   if (!is.logical(attached) || length(attached) != 1) {
     stop("<attached> must be TRUE/FALSE", call. = FALSE)

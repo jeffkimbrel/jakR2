@@ -11,6 +11,8 @@ test_that("titling works", {
 })
 
 test_that("pipe in link fails", {
-  expect_error(obs2gfm("obsidian note|new text"),
-               "<link> should not contain `|`, try using the <text> argument as well")
+  expect_error(
+    obs2gfm("obsidian note|new text"),
+    "<link> should not contain `|`, try using the <text> argument as well"
+  )
 })

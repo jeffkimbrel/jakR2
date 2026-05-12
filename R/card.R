@@ -33,7 +33,6 @@ cp_helper <- function(card) {
 #' @returns A dataframe with card annotations
 
 card_parse <- function(card_path, quiet = F) {
-
   # card_path must be a file path and the file must exist
   if (!file.exists(card_path)) {
     stop("<card_path> file not found", call. = F)
@@ -62,7 +61,6 @@ card_parse <- function(card_path, quiet = F) {
 #' @family "CARD/RGI"
 
 card_ab_info <- function(card, ab) {
-
   # card must be a dataframe
   if (!is.data.frame(card)) {
     stop("<card> must be a dataframe", call. = F)
@@ -89,7 +87,6 @@ card_ab_info <- function(card, ab) {
 
 
 card_ab2gene <- function(card, ab, return = "df") {
-
   # card must be a dataframe
   if (!is.data.frame(card)) {
     stop("<card> must be a dataframe", call. = F)
@@ -119,7 +116,6 @@ card_ab2gene <- function(card, ab, return = "df") {
 #' @family "CARD/RGI"
 
 card_gene2ab <- function(card, gene) {
-
   # card must be a dataframe
   if (!is.data.frame(card)) {
     stop("<card> must be a dataframe", call. = F)
@@ -136,7 +132,6 @@ card_gene2ab <- function(card, gene) {
 }
 
 
-
 #' Get antibiotic information about a gene
 #'
 #' @param card output from `card_parse()`
@@ -146,7 +141,6 @@ card_gene2ab <- function(card, gene) {
 #' @family "CARD/RGI"
 
 card_gene_info <- function(card, gene) {
-
   # card must be a dataframe
   if (!is.data.frame(card)) {
     stop("<card> must be a dataframe", call. = F)

@@ -45,7 +45,6 @@ seqtab_stats <- function(seqtab) {
 }
 
 
-
 #' Stats of multiple seqtab objects
 #'
 #' @param ... One or more seqtab objects
@@ -54,7 +53,6 @@ seqtab_stats <- function(seqtab) {
 #' @export
 
 seqtab_stats_bind <- function(...) {
-
   seqtab_names <- as.character(substitute(list(...)))[-1]
   seqtab_list <- mget(seqtab_names, envir = parent.frame())
 
@@ -75,7 +73,6 @@ seqtab_stats_bind <- function(...) {
 }
 
 
-
 #' Plot multiple seqtab objects
 #'
 #' @param ... One or more seqtab objects
@@ -83,8 +80,7 @@ seqtab_stats_bind <- function(...) {
 #' @returns A ggplot object
 #' @export
 
-seqtab_stats_plot = function(...) {
-
+seqtab_stats_plot <- function(...) {
   # note, the top half of this (before the ggplot call) is identical to seqtab_stats_bind, but I can't use that function here because the mget call doesn't work
 
   seqtab_names <- as.character(substitute(list(...)))[-1]
@@ -103,9 +99,9 @@ seqtab_stats_plot = function(...) {
       values_to = "VALUE"
     ) |> #
     ggplot2::ggplot(ggplot2::aes(x = LENGTH, y = VALUE, fill = STEP)) +
-      ggplot2::geom_col(position = "dodge") +
-      scale_fill_jak_d() +
-      ggplot2::facet_wrap(~METRIC, scales = "free_y", ncol = 1) +
-      ggplot2::scale_y_continuous(labels=function(x) format(x, big.mark = ",", decimal.mark = ".", scientific = FALSE)) +
-      ggplot2::labs(x = "ASV Length", y = "ASV Count", title = "ASV frequency and abundance by length")
+    ggplot2::geom_col(position = "dodge") +
+    scale_fill_jak_d() +
+    ggplot2::facet_wrap(~METRIC, scales = "free_y", ncol = 1) +
+    ggplot2::scale_y_continuous(labels = function(x) format(x, big.mark = ",", decimal.mark = ".", scientific = FALSE)) +
+    ggplot2::labs(x = "ASV Length", y = "ASV Count", title = "ASV frequency and abundance by length")
 }

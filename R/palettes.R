@@ -54,7 +54,6 @@ palette_jak <- function(p = "bay",
   } else {
     return(cols)
   }
-
 }
 
 
@@ -91,7 +90,6 @@ all_are_valid_colors <- function(x) {
 #' @export
 
 get_color_palette <- function(pal, full = FALSE) {
-
   rows <- ceiling(sqrt(length(pal)))
 
   df <- data.frame(toupper(pal))
@@ -99,7 +97,7 @@ get_color_palette <- function(pal, full = FALSE) {
 
   colnames(df) <- c("COLOR", "POS")
 
-  df = df |>
+  df <- df |>
     dplyr::mutate(y = dplyr::ntile(n = rows)) |>
     dplyr::group_by(y) |>
     dplyr::mutate(x = seq(dplyr::n())) |>
@@ -111,11 +109,10 @@ get_color_palette <- function(pal, full = FALSE) {
   if (isTRUE(full)) {
     return(df)
   } else {
-    df_small = df |>
+    df_small <- df |>
       dplyr::select("Position" = POS, "HEX" = COLOR)
     return(df_small)
   }
-
 }
 
 #' showColorPalette
@@ -131,8 +128,7 @@ show_color_palette <- function(pal,
                                labels = FALSE,
                                label_angle = 0,
                                alpha = 1) {
-
-  df = get_color_palette(pal, full = TRUE)
+  df <- get_color_palette(pal, full = TRUE)
 
   p <- df |>
     ggplot2::ggplot(ggplot2::aes(x = x, y = y, fill = COLOR)) +
@@ -143,9 +139,13 @@ show_color_palette <- function(pal,
 
   if (isTRUE(labels)) {
     p <- p +
-      ggplot2::geom_text(ggplot2::aes(label = paste(POS, COLOR, sep = ") "),
-                                             color = TEXT_COLOR),
-                                angle = label_angle) +
+      ggplot2::geom_text(
+        ggplot2::aes(
+          label = paste(POS, COLOR, sep = ") "),
+          color = TEXT_COLOR
+        ),
+        angle = label_angle
+      ) +
       ggplot2::scale_color_identity()
   }
 
@@ -159,8 +159,6 @@ show_color_palette <- function(pal,
 #' @export
 
 show_all_color_palettes <- function(alpha = 1) {
-
-
   # Check if alpha is a valid numeric value between 0 and 1
   if (!is.numeric(alpha) || length(alpha) != 1 || alpha < 0 || alpha > 1) {
     stop("alpha must be a numeric value between 0 and 1", call. = F)
@@ -177,14 +175,11 @@ show_all_color_palettes <- function(alpha = 1) {
 
   df |>
     ggplot2::ggplot(ggplot2::aes(x = x, y = Palette, fill = RGB)) +
-      ggplot2::theme_minimal() +
-      ggplot2::geom_tile(alpha = alpha) +
-      ggplot2::scale_fill_identity() +
-      ggplot2::scale_y_discrete(limits = rev)
+    ggplot2::theme_minimal() +
+    ggplot2::geom_tile(alpha = alpha) +
+    ggplot2::scale_fill_identity() +
+    ggplot2::scale_y_discrete(limits = rev)
 }
-
-
-
 
 
 #' Title
@@ -194,13 +189,13 @@ show_all_color_palettes <- function(alpha = 1) {
 #' @export
 
 get_luminance <- function(hex) {
-  rgb_color = col2rgb(hex) / 255
+  rgb_color <- col2rgb(hex) / 255
   R <- rgb_color[1]
   G <- rgb_color[2]
   B <- rgb_color[3]
 
   # https://stackoverflow.com/questions/596216/formula-to-determine-perceived-brightness-of-rgb-color
-  luminance <- 0.2126*R + 0.7152*G + 0.0722*B
+  luminance <- 0.2126 * R + 0.7152 * G + 0.0722 * B
   return(luminance)
 }
 
@@ -221,8 +216,6 @@ get_text_color <- function(background_rgb, t = 0.5) {
 }
 
 
-
-
 #' Blend palette with a color
 #'
 #' This idea comes (and uses functions) from the `monochromeR` package and Cara
@@ -236,8 +229,7 @@ get_text_color <- function(background_rgb, t = 0.5) {
 #'
 #' @export
 
-blend_palette = function(colors, blend, amount = 3) {
-
+blend_palette <- function(colors, blend, amount = 3) {
   # amount must be an integer between 0 and 10
   if (!is.numeric(amount) || amount < 0 || amount > 10) {
     stop("Amount must be an integer between 0 and 10.")
@@ -256,11 +248,11 @@ blend_palette = function(colors, blend, amount = 3) {
     stop("<blend> is an invalid color", call. = F)
   }
 
-  amount = 12 - amount
+  amount <- 12 - amount
 
   tibble::enframe(colors, value = "color") |>
     dplyr::rowwise() |>
-    dplyr::mutate(blend = purrr::map(color, ~suppressMessages(monochromeR::generate_palette(
+    dplyr::mutate(blend = purrr::map(color, ~ suppressMessages(monochromeR::generate_palette(
       colour = color,
       n_colours = amount,
       blend_colour = blend,

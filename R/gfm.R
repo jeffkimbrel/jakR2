@@ -6,24 +6,21 @@
 #' @export
 
 
-obs2gfm = function(link, text = NA) {
-
+obs2gfm <- function(link, text = NA) {
   # if link contains "|" give error to reformat and use text argument
   stopifnot("<link> should not contain `|`, try using the <text> argument as well" = !grepl("\\|", link))
 
   if (is.na(text)) {
     glue::glue("`[[{{link}}]]`{=gfm}",
-               .open = "{{",
-               .close = "}}"
+      .open = "{{",
+      .close = "}}"
     )
   } else {
     glue::glue("`[[{{link}}|{{text}}]]`{=gfm}",
-               .open = "{{",
-               .close = "}}"
+      .open = "{{",
+      .close = "}}"
     )
   }
-
-
 }
 
 
@@ -45,8 +42,6 @@ obs2gfm = function(link, text = NA) {
 file2gfm <- function(file,
                      path = NA,
                      verify = F) {
-
-
   if (!is.na(path)) {
     # verify that path is a directory (not a file) and does exist
     stopifnot("<path> is not a directory or does not exist" = dir.exists(path))
@@ -54,9 +49,8 @@ file2gfm <- function(file,
     # if exists, then combine path and file
     file <- file.path(path, file)
   } else {
-
     # otherwise, expand the file to a complete path
-    file = path.expand(file)
+    file <- path.expand(file)
   }
 
   if (verify) {
@@ -71,8 +65,6 @@ file2gfm <- function(file,
 }
 
 
-
-
 #' Obsidian callout
 #'
 #' Obisidan callouts can be one of many types. If a header line is not given,
@@ -85,39 +77,38 @@ file2gfm <- function(file,
 #'
 #' @export
 
-obs_callout = function(type = "info", header = "", body = "") {
-
-  allowed_types = c("note",
-                    "abstract", "summary", "tldr",
-                    "info",
-                    "todo",
-                    "tip", "hint", "important",
-                    "success", "check", "done",
-                    "question", "help", "faq",
-                    "warning", "caution", "attention",
-                    "failure", "fail", "missing",
-                    "danger", "error",
-                    "bug",
-                    "example", "quote")
+obs_callout <- function(type = "info", header = "", body = "") {
+  allowed_types <- c(
+    "note",
+    "abstract", "summary", "tldr",
+    "info",
+    "todo",
+    "tip", "hint", "important",
+    "success", "check", "done",
+    "question", "help", "faq",
+    "warning", "caution", "attention",
+    "failure", "fail", "missing",
+    "danger", "error",
+    "bug",
+    "example", "quote"
+  )
 
 
   # if link contains "|" give error to reformat and use text argument
   stopifnot("<type> is not one of the allowed types" = type %in% allowed_types)
 
   if (body == "") {
-   glue::glue("`> [!{{type}}] {{header}}`{=gfm}",
-     .open = "{{",
-     .close = "}}"
-   )
- } else {
-   glue::glue("```{=gfm}
+    glue::glue("`> [!{{type}}] {{header}}`{=gfm}",
+      .open = "{{",
+      .close = "}}"
+    )
+  } else {
+    glue::glue("```{=gfm}
               > [!{{type}}] {{header}}
               > {{body}}
               ```",
-     .open = "{{",
-     .close = "}}"
-   )
- }
-
-
+      .open = "{{",
+      .close = "}}"
+    )
+  }
 }

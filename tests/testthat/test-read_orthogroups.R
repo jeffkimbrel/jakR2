@@ -3,8 +3,10 @@ test_that("import produces correct snapshot", {
 })
 
 test_that("messages work as expected", {
-  expect_message(read_orthogroups(test_path("fixtures", "Orthogroups.tsv")),
-                 "Orthogroups.tsv contains 11 orthogroups across 5 genomes")
+  expect_message(
+    read_orthogroups(test_path("fixtures", "Orthogroups.tsv")),
+    "Orthogroups.tsv contains 11 orthogroups across 5 genomes"
+  )
   expect_no_message(read_orthogroups(test_path("fixtures", "Orthogroups.tsv"), quiet = T))
 })
 
@@ -21,7 +23,10 @@ test_that("type changes output", {
 })
 
 test_that("incorrect type gives error", {
-  expect_error(read_orthogroups(test_path("fixtures", "Orthogroups.tsv"),
-                                type = "not_a_type"),
-               "<type> must be either 'count' or 'list'")
+  expect_error(
+    read_orthogroups(test_path("fixtures", "Orthogroups.tsv"),
+      type = "not_a_type"
+    ),
+    "<type> must be either 'count' or 'list'"
+  )
 })

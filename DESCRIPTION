@@ -1,6 +1,6 @@
 Package: jakR2
 Title: JAK R functions, round 2
-Version: 0.3.11
+Version: 0.4.0
 Authors@R: 
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
@@ -13,7 +13,8 @@ Config/testthat/edition: 3
 URL: https://github.com/jeffkimbrel/jakR2,
     https://jeffkimbrel.github.io/jakR2/
 BugReports: https://github.com/jeffkimbrel/jakR2/issues
-Suggests: 
+Suggests:
+    phyloseq,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
