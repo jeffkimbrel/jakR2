@@ -14,10 +14,10 @@
 - [`get_alpha_S()`](https://jeffkimbrel.github.io/jakR2/reference/get_alpha_S.md)
   : Calculate richness (S) and sample depth
 - [`get_alpha_simpson()`](https://jeffkimbrel.github.io/jakR2/reference/get_alpha_simpson.md)
-  : Calculate Simpson's diversity index and its evenness and inverse
+  : Calculate Simpson's diversity, Gini-Simpson index, ENS, and evenness
 - [`get_alpha_shannon()`](https://jeffkimbrel.github.io/jakR2/reference/get_alpha_shannon.md)
-  : Calculate Shannon's diversity index and its evenness and effective
-  number of species (ENS)
+  : Calculate Shannon's entropy, ENS, Pielou's evenness, and ENS-based
+  evenness
 
 ## Phlyogenetics
 
@@ -76,8 +76,8 @@
   : Extract DADA2 seqtab statistics
 - [`seqtab_to_ft()`](https://jeffkimbrel.github.io/jakR2/reference/seqtab_to_ft.md)
   : Make ft object from DADA2 seqtab
-- [`ft()`](https://jeffkimbrel.github.io/jakR2/reference/ft.md) :
-  Feature table class
+- [`ft`](https://jeffkimbrel.github.io/jakR2/reference/ft.md) : Feature
+  table class
 - [`get_asv_table`](https://jeffkimbrel.github.io/jakR2/reference/get_asv_table.md)
   : Return ASV table from ft object
 - [`get_sequences`](https://jeffkimbrel.github.io/jakR2/reference/get_sequences.md)
@@ -119,3 +119,16 @@
   : Package info utility
 - [`get_session_info()`](https://jeffkimbrel.github.io/jakR2/reference/get_session_info.md)
   : Session info utility
+
+## Data
+
+- [`jak_palettes`](https://jeffkimbrel.github.io/jakR2/reference/jak_palettes.md)
+  : JAK color palettes
+- [`jak_samp`](https://jeffkimbrel.github.io/jakR2/reference/jak_samp.md)
+  : Sample abundance matrix for examples and tests
+- [`jak_tree`](https://jeffkimbrel.github.io/jakR2/reference/jak_tree.md)
+  : Sample phylogenetic tree for examples and tests
+- [`EC_number_regex`](https://jeffkimbrel.github.io/jakR2/reference/EC_number_regex.md)
+  : Regular expression for EC numbers
+- [`gene_symbol_regex`](https://jeffkimbrel.github.io/jakR2/reference/gene_symbol_regex.md)
+  : Regular expression for gene symbols

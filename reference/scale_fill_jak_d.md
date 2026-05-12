@@ -12,7 +12,8 @@ scale_fill_jak_d(p = "bay", colors = NULL, order = "default")
 
 - p:
 
-  color palette to use from `jakR2::jak_palettes`
+  color palette to use from
+  [`jakR2::jak_palettes`](https://jeffkimbrel.github.io/jakR2/reference/jak_palettes.md)
 
 - colors:
 

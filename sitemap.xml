@@ -5,6 +5,7 @@
 <url><loc>https://jeffkimbrel.github.io/jakR2/authors.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/index.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/news/index.html</loc></url>
+<url><loc>https://jeffkimbrel.github.io/jakR2/reference/EC_number_regex.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/all_are_valid_colors.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/blend_palette.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/card_ab2gene.html</loc></url>
@@ -20,6 +21,7 @@
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/file2gfm.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/filter_asv_table.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/ft.html</loc></url>
+<url><loc>https://jeffkimbrel.github.io/jakR2/reference/gene_symbol_regex.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/get_alpha_S.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/get_alpha_diversity.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/get_alpha_shannon.html</loc></url>
@@ -37,10 +39,13 @@
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/jak_color.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/jak_grid.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/jak_legend.html</loc></url>
+<url><loc>https://jeffkimbrel.github.io/jakR2/reference/jak_palettes.html</loc></url>
+<url><loc>https://jeffkimbrel.github.io/jakR2/reference/jak_samp.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/jak_strips.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/jak_text.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/jak_theme.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/jak_transparent.html</loc></url>
+<url><loc>https://jeffkimbrel.github.io/jakR2/reference/jak_tree.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/obs2gfm.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/obs_callout.html</loc></url>
 <url><loc>https://jeffkimbrel.github.io/jakR2/reference/orthogroup_list2counts.html</loc></url>

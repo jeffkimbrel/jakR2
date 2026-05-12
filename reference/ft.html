@@ -9,7 +9,7 @@ along with optional clustering information and filtering parameters."></head><bo
 
     <a class="navbar-brand me-2" href="../index.html">jakR2</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.11</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,40 +46,6 @@ along with optional clustering information and filtering parameters."></head><bo
 along with optional clustering information and filtering parameters.</p>
     </div>
 
-    <div class="section level2">
-    <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ft</span><span class="op">(</span></span>
-<span>  table <span class="op">=</span> <span class="op">(</span><span class="kw">function</span> <span class="op">(</span><span class="va">.data</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">row.names</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> </span>
-<span> <span class="op">{</span></span>
-<span>     <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">row.names</span><span class="op">)</span><span class="op">)</span></span>
-<span>    <span class="op">{</span></span>
-<span>         <span class="fu"><a href="https://rdrr.io/r/base/list2DF.html" class="external-link">list2DF</a></span><span class="op">(</span><span class="va">.data</span><span class="op">)</span></span>
-<span>     <span class="op">}</span></span>
-<span>     <span class="kw">else</span> <span class="op">{</span></span>
-<span>         <span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list2DF.html" class="external-link">list2DF</a></span><span class="op">(</span><span class="va">.data</span>,</span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">row.names</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">out</span>, <span class="st">"row.names"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">row.names</span></span>
-<span>         <span class="va">out</span></span>
-<span>     <span class="op">}</span></span>
-<span></span>
-<span>    <span class="op">}</span><span class="op">)</span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  clusters <span class="op">=</span> <span class="op">(</span><span class="kw">function</span> <span class="op">(</span><span class="va">.data</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">row.names</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> </span>
-<span> <span class="op">{</span></span>
-<span>     <span class="kw">if</span></span>
-<span>    <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">row.names</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>         <span class="fu"><a href="https://rdrr.io/r/base/list2DF.html" class="external-link">list2DF</a></span><span class="op">(</span><span class="va">.data</span><span class="op">)</span></span>
-<span>     <span class="op">}</span></span>
-<span>     <span class="kw">else</span> <span class="op">{</span></span>
-<span>         <span class="va">out</span> <span class="op">&lt;-</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/list2DF.html" class="external-link">list2DF</a></span><span class="op">(</span><span class="va">.data</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">row.names</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">out</span>, <span class="st">"row.names"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">row.names</span></span>
-<span>      </span>
-<span>      <span class="va">out</span></span>
-<span>     <span class="op">}</span></span>
-<span> <span class="op">}</span><span class="op">)</span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  filter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-    </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
@@ -88,10 +54,17 @@ along with optional clustering information and filtering parameters.</p>
 <dl><dt id="arg-table">table<a class="anchor" aria-label="anchor" href="#arg-table"></a></dt>
 <dd><p>A data frame containing the feature table with ASVs and sequences.</p></dd>
 
+
+<dt id="arg-clusters">clusters<a class="anchor" aria-label="anchor" href="#arg-clusters"></a></dt>
+<dd><p>A data frame containing cluster assignments, populated by <code><a href="cluster_asv_table.html">cluster_asv_table()</a></code>.</p></dd>
+
+
+<dt id="arg-filter">filter<a class="anchor" aria-label="anchor" href="#arg-filter"></a></dt>
+<dd><p>A list containing filtering parameters applied to the table, populated by <code><a href="filter_asv_table.html">filter_asv_table()</a></code>.</p></dd>
+
 </dl></div>
 
-  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
-    </nav></aside></div>
+  </main></div>
 
 
     <footer><div class="pkgdown-footer-left">

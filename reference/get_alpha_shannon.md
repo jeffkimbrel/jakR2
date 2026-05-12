@@ -1,7 +1,11 @@
-# Calculate Shannon's diversity index and its evenness and effective number of species (ENS)
+# Calculate Shannon's entropy, ENS, Pielou's evenness, and ENS-based evenness
 
-Calculate Shannon's diversity index and its evenness and effective
-number of species (ENS)
+Shannon's H is an entropy (in nats), not a diversity. `SHANNON_ENS`
+converts it to an effective number of species via exp(H) — the q=1 Hill
+number, interpretable as the number of equally abundant species that
+would produce the same entropy. Two evenness measures are returned:
+Pielou's J (widely used, entropy-based) and an ENS-based evenness
+consistent with the Hill number framework.
 
 ## Usage
 
@@ -22,3 +26,25 @@ get_alpha_shannon(df, feature_id = "feature_id", id_col = "SAMPLE")
 - id_col:
 
   The name of the column with sample IDs (default is "SAMPLE")
+
+## Value
+
+A tibble with one row per sample and columns:
+
+- SHANNON_H:
+
+  Shannon entropy H (nats); an index, not a diversity
+
+- SHANNON_ENS:
+
+  Effective number of species (exp(H)); the q=1 Hill number
+
+- SHANNON_PIELOU:
+
+  Pielou's J evenness (H / log(S.obs)); ratio of observed to maximum
+  possible entropy
+
+- SHANNON_EVENNESS:
+
+  ENS-based evenness (SHANNON_ENS / S.obs); ranges from 1/S.obs (single
+  dominant) to 1 (all species equal)

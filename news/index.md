@@ -1,5 +1,18 @@
 # Changelog
 
+## jakR2 0.4
+
+- Reworked alpha-diversity functions with corrected naming and Hill
+  number framework
+  - `SIMPSON_EVENNESS` renamed to `GINI_SIMPSON` (1 - D);
+    `SIMPSON_INVERSE` renamed to `SIMPSON_ENS` (1/D)
+  - New `SIMPSON_ENS_EVENNESS` column (ENS / S.obs)
+  - `SHANNON_E` renamed to `SHANNON_PIELOU`; new `SHANNON_EVENNESS`
+    column (ENS / S.obs)
+- Added roxygen documentation for all package data objects
+- Added `@param` entries for `clusters` and `filter` in the `ft` class
+- Added testthat coverage for all alpha-diversity functions
+
 ## jakR2 0.3
 
 - A new `S7` object called `ft` to hold feature tables
