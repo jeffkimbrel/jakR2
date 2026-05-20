@@ -4,12 +4,14 @@
 \alias{obs2gfm}
 \title{Decorate an Obsidian link for gfm markdown}
 \usage{
-obs2gfm(link, text = NA)
+obs2gfm(link, text = NA, embed = FALSE)
 }
 \arguments{
 \item{link}{A string representing the link}
 
 \item{text}{A string representing the text to display}
+
+\item{embed}{Logical; if TRUE, produces an embed link (\verb{![[link]]}) instead of a regular link}
 }
 \description{
 Decorate an Obsidian link for gfm markdown

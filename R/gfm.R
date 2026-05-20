@@ -2,21 +2,24 @@
 #'
 #' @param link A string representing the link
 #' @param text A string representing the text to display
+#' @param embed Logical; if TRUE, produces an embed link (`![[link]]`) instead of a regular link
 #'
 #' @export
 
 
-obs2gfm <- function(link, text = NA) {
+obs2gfm <- function(link, text = NA, embed = FALSE) {
   # if link contains "|" give error to reformat and use text argument
   stopifnot("<link> should not contain `|`, try using the <text> argument as well" = !grepl("\\|", link))
 
+  prefix <- if (embed) "!" else ""
+
   if (is.na(text)) {
-    glue::glue("`[[{{link}}]]`{=gfm}",
+    glue::glue("`{{prefix}}[[{{link}}]]`{=gfm}",
       .open = "{{",
       .close = "}}"
     )
   } else {
-    glue::glue("`[[{{link}}|{{text}}]]`{=gfm}",
+    glue::glue("`{{prefix}}[[{{link}}|{{text}}]]`{=gfm}",
       .open = "{{",
       .close = "}}"
     )
