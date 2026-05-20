@@ -5,7 +5,7 @@ Decorate an Obsidian link for gfm markdown
 ## Usage
 
 ``` r
-obs2gfm(link, text = NA)
+obs2gfm(link, text = NA, embed = FALSE)
 ```
 
 ## Arguments
@@ -17,3 +17,8 @@ obs2gfm(link, text = NA)
 - text:
 
   A string representing the text to display
+
+- embed:
+
+  Logical; if TRUE, produces an embed link (`![[link]]`) instead of a
+  regular link

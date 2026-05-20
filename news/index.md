@@ -12,6 +12,9 @@
 - Added roxygen documentation for all package data objects
 - Added `@param` entries for `clusters` and `filter` in the `ft` class
 - Added testthat coverage for all alpha-diversity functions
+- Added embed argument to
+  [`obs2gfm()`](https://jeffkimbrel.github.io/jakR2/reference/obs2gfm.md)
+  function
 
 ## jakR2 0.3
 
