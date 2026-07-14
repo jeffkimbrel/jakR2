@@ -17,10 +17,10 @@ card_ab2gene(card, ab, return = "df")
 Get gene information about an antibiotic
 }
 \seealso{
-Other "CARD/RGI": 
-\code{\link{card_ab_info}()},
-\code{\link{card_gene2ab}()},
-\code{\link{card_gene_info}()},
-\code{\link{card_parse}()}
+Other "CARD/RGI":
+\code{\link[=card_ab_info]{card_ab_info()}},
+\code{\link[=card_gene2ab]{card_gene2ab()}},
+\code{\link[=card_gene_info]{card_gene_info()}},
+\code{\link[=card_parse]{card_parse()}}
 }
 \concept{"CARD/RGI"}

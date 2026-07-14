@@ -19,10 +19,10 @@ This function parses the CARD JSON file and returns a dataframe. This
 dataframe can be used by other functions in the function family.
 }
 \seealso{
-Other "CARD/RGI": 
-\code{\link{card_ab2gene}()},
-\code{\link{card_ab_info}()},
-\code{\link{card_gene2ab}()},
-\code{\link{card_gene_info}()}
+Other "CARD/RGI":
+\code{\link[=card_ab2gene]{card_ab2gene()}},
+\code{\link[=card_ab_info]{card_ab_info()}},
+\code{\link[=card_gene2ab]{card_gene2ab()}},
+\code{\link[=card_gene_info]{card_gene_info()}}
 }
 \concept{"CARD/RGI"}

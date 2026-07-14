@@ -15,10 +15,10 @@ card_gene_info(card, gene)
 Get antibiotic information about a gene
 }
 \seealso{
-Other "CARD/RGI": 
-\code{\link{card_ab2gene}()},
-\code{\link{card_ab_info}()},
-\code{\link{card_gene2ab}()},
-\code{\link{card_parse}()}
+Other "CARD/RGI":
+\code{\link[=card_ab2gene]{card_ab2gene()}},
+\code{\link[=card_ab_info]{card_ab_info()}},
+\code{\link[=card_gene2ab]{card_gene2ab()}},
+\code{\link[=card_parse]{card_parse()}}
 }
 \concept{"CARD/RGI"}

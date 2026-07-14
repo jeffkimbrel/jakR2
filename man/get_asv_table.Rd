@@ -3,6 +3,10 @@
 \name{get_asv_table}
 \alias{get_asv_table}
 \title{Return ASV table from ft object}
+\usage{
+## S7 method for class <jakR2::ft>
+get_asv_table(x)
+}
 \arguments{
 \item{x}{An ft object}
 }

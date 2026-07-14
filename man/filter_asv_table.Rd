@@ -3,6 +3,10 @@
 \name{filter_asv_table}
 \alias{filter_asv_table}
 \title{Filter an ft object by minimum count and sample}
+\usage{
+## S7 method for class <jakR2::ft>
+filter_asv_table(x, min_count = 2, min_sample = 2)
+}
 \arguments{
 \item{x}{An ft object}
 

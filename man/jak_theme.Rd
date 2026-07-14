@@ -61,5 +61,5 @@ A ggplot2 theme object
 \description{
 A complete ggplot2 theme that combines \code{\link[=jak_transparent]{jak_transparent()}}, \code{\link[=jak_color]{jak_color()}},
 \code{\link[=jak_text]{jak_text()}}, \code{\link[=jak_grid]{jak_grid()}}, \code{\link[=jak_legend]{jak_legend()}}, and \code{\link[=jak_strips]{jak_strips()}} into a single
-convenience wrapper. Built on top of \code{\link[ggplot2:ggtheme]{ggplot2::theme_bw()}}.
+convenience wrapper. Built on top of \code{\link[ggplot2:theme_bw]{ggplot2::theme_bw()}}.
 }

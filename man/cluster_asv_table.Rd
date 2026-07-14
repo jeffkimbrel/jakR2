@@ -3,6 +3,10 @@
 \name{cluster_asv_table}
 \alias{cluster_asv_table}
 \title{Cluster ASV sequences from ft object}
+\usage{
+## S7 method for class <jakR2::ft>
+cluster_asv_table(x, id = 0.99, nproc = 1, quiet = TRUE)
+}
 \arguments{
 \item{x}{An ft object}
 

@@ -3,6 +3,10 @@
 \name{get_sequences}
 \alias{get_sequences}
 \title{Return DNAstring object from ft object}
+\usage{
+## S7 method for class <jakR2::ft>
+get_asv_table(x)
+}
 \arguments{
 \item{x}{An ft object}
 }
