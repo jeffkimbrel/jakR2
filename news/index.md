@@ -15,6 +15,7 @@
 - Added embed argument to
   [`obs2gfm()`](https://jeffkimbrel.github.io/jakR2/reference/obs2gfm.md)
   function
+- Created `sysdata.rda` to store data accessible with `::`
 
 ## jakR2 0.3
 

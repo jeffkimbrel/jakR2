@@ -2,6 +2,13 @@
 
 Filter an ft object by minimum count and sample
 
+## Usage
+
+``` r
+## S7 method for class <jakR2::ft>
+filter_asv_table(x, min_count = 2, min_sample = 2)
+```
+
 ## Arguments
 
 - x:

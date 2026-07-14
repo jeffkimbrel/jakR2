@@ -2,6 +2,13 @@
 
 Cluster ASV sequences from ft object
 
+## Usage
+
+``` r
+## S7 method for class <jakR2::ft>
+cluster_asv_table(x, id = 0.99, nproc = 1, quiet = TRUE)
+```
+
 ## Arguments
 
 - x:

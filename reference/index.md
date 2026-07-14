@@ -78,13 +78,13 @@
   : Make ft object from DADA2 seqtab
 - [`ft`](https://jeffkimbrel.github.io/jakR2/reference/ft.md) : Feature
   table class
-- [`get_asv_table`](https://jeffkimbrel.github.io/jakR2/reference/get_asv_table.md)
+- [`get_asv_table()`](https://jeffkimbrel.github.io/jakR2/reference/get_asv_table.md)
   : Return ASV table from ft object
-- [`get_sequences`](https://jeffkimbrel.github.io/jakR2/reference/get_sequences.md)
+- [`get_asv_table()`](https://jeffkimbrel.github.io/jakR2/reference/get_sequences.md)
   : Return DNAstring object from ft object
-- [`filter_asv_table`](https://jeffkimbrel.github.io/jakR2/reference/filter_asv_table.md)
+- [`filter_asv_table()`](https://jeffkimbrel.github.io/jakR2/reference/filter_asv_table.md)
   : Filter an ft object by minimum count and sample
-- [`cluster_asv_table`](https://jeffkimbrel.github.io/jakR2/reference/cluster_asv_table.md)
+- [`cluster_asv_table()`](https://jeffkimbrel.github.io/jakR2/reference/cluster_asv_table.md)
   : Cluster ASV sequences from ft object
 - [`seqtab_stats_bind()`](https://jeffkimbrel.github.io/jakR2/reference/seqtab_stats_bind.md)
   : Stats of multiple seqtab objects
