@@ -5,7 +5,7 @@
 \title{Return DNAstring object from ft object}
 \usage{
 ## S7 method for class <jakR2::ft>
-get_asv_table(x)
+get_sequences(x)
 }
 \arguments{
 \item{x}{An ft object}

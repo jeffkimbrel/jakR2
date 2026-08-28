@@ -54,6 +54,7 @@ ft <- S7::new_class("ft",
   }
 )
 
+#' @export
 get_asv_table <- S7::new_generic("get_asv_table", "x")
 
 #' Return ASV table from ft object
@@ -68,7 +69,8 @@ S7::method(get_asv_table, ft) <- function(x) {
     dplyr::select(-SEQUENCE)
 }
 
-get_sequences <- S7::new_generic("get_asv_table", "x")
+#' @export
+get_sequences <- S7::new_generic("get_sequences", "x")
 
 #' Return DNAstring object from ft object
 #'
@@ -83,6 +85,7 @@ S7::method(get_sequences, ft) <- function(x) {
   return(dna)
 }
 
+#' @export
 filter_asv_table <- S7::new_generic("filter_asv_table", "x")
 
 #' Filter an ft object by minimum count and sample
@@ -144,6 +147,7 @@ S7::method(filter_asv_table, ft) <- function(x, min_count = 2, min_sample = 2) {
 }
 
 
+#' @export
 cluster_asv_table <- S7::new_generic("cluster_asv_table", "x")
 
 #' Cluster ASV sequences from ft object

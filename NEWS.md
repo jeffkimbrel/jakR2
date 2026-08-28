@@ -1,3 +1,5 @@
+# jakR2 0.4.3
+
 # jakR2 0.4
 
 * Reworked alpha-diversity functions with corrected naming and Hill number framework
