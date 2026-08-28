@@ -80,7 +80,7 @@
   table class
 - [`get_asv_table()`](https://jeffkimbrel.github.io/jakR2/reference/get_asv_table.md)
   : Return ASV table from ft object
-- [`get_asv_table()`](https://jeffkimbrel.github.io/jakR2/reference/get_sequences.md)
+- [`get_sequences()`](https://jeffkimbrel.github.io/jakR2/reference/get_sequences.md)
   : Return DNAstring object from ft object
 - [`filter_asv_table()`](https://jeffkimbrel.github.io/jakR2/reference/filter_asv_table.md)
   : Filter an ft object by minimum count and sample

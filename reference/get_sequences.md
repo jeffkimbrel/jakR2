@@ -6,7 +6,7 @@ Return DNAstring object from ft object
 
 ``` r
 ## S7 method for class <jakR2::ft>
-get_asv_table(x)
+get_sequences(x)
 ```
 
 ## Arguments
