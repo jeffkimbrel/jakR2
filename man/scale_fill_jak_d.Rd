@@ -8,7 +8,9 @@ scale_fill_jak_d(
   p = "bay",
   colors = NULL,
   order = "default",
-  na_value = "gray50"
+  na_value = "gray50",
+  name = ggplot2::waiver(),
+  guide = "legend"
 )
 }
 \arguments{
@@ -19,6 +21,10 @@ scale_fill_jak_d(
 \item{order}{Order of the palette, "default", "reverse" or "random"}
 
 \item{na_value}{Color to use for NA values. Default \code{"gray50"}}
+
+\item{name}{Legend title. Defaults to the name of the aesthetic (e.g., the variable name)}
+
+\item{guide}{Guide to use for the legend. See \code{\link[ggplot2:guide_legend]{ggplot2::guide_legend()}} for details}
 }
 \description{
 Custom discrete ggplot2 scale fill

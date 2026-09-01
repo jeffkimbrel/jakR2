@@ -197,13 +197,17 @@ jak_theme <- function(
 #' @param colors An optional vector of rgb or colors to use. Overwrites `p`
 #' @param order Order of the palette, "default", "reverse" or "random"
 #' @param na_value Color to use for NA values. Default `"gray50"`
+#' @param name Legend title. Defaults to the name of the aesthetic (e.g., the variable name)
+#' @param guide Guide to use for the legend. See [ggplot2::guide_legend()] for details
 #'
 #' @export
 
 scale_color_jak_d <- function(p = "bay",
                               colors = NULL,
                               order = "default",
-                              na_value = "gray50") {
+                              na_value = "gray50",
+                              name = ggplot2::waiver(),
+                              guide = "legend") {
   # p must be in the names of jak_palettes
   if (!p %in% names(jak_palettes)) {
     stop(paste0("'", p, "' is not a known palette name"))
@@ -229,7 +233,9 @@ scale_color_jak_d <- function(p = "bay",
         order = order
       )
     },
-    na.value = na_value
+    na.value = na_value,
+    name = name,
+    guide = guide
   )
 }
 
@@ -240,11 +246,13 @@ scale_color_jak_d <- function(p = "bay",
 #' @param colors An optional vector of rgb or colors to use. Overwrites `p`
 #' @param order Order of the palette, "default", "reverse" or "random"
 #' @param na_value Color to use for NA values. Default `"gray50"`
+#' @param name Legend title. Defaults to the name of the aesthetic (e.g., the variable name)
+#' @param guide Guide to use for the legend. See [ggplot2::guide_legend()] for details
 #'
 #' @export
 
 
-scale_fill_jak_d <- function(p = "bay", colors = NULL, order = "default", na_value = "gray50") {
+scale_fill_jak_d <- function(p = "bay", colors = NULL, order = "default", na_value = "gray50", name = ggplot2::waiver(), guide = "legend") {
   # p must be in the names of jak_palettes
   if (!p %in% names(jak_palettes)) {
     stop(paste0("'", p, "' is not a known palette name"))
@@ -270,6 +278,8 @@ scale_fill_jak_d <- function(p = "bay", colors = NULL, order = "default", na_val
         order = order
       )
     },
-    na.value = na_value
+    na.value = na_value,
+    name = name,
+    guide = guide
   )
 }
