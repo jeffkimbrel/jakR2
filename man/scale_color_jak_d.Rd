@@ -4,7 +4,12 @@
 \alias{scale_color_jak_d}
 \title{Custom discrete ggplot2 scale color}
 \usage{
-scale_color_jak_d(p = "bay", colors = NULL, order = "default")
+scale_color_jak_d(
+  p = "bay",
+  colors = NULL,
+  order = "default",
+  na_value = "gray50"
+)
 }
 \arguments{
 \item{p}{color palette to use from \code{jakR2::jak_palettes}}
@@ -12,6 +17,8 @@ scale_color_jak_d(p = "bay", colors = NULL, order = "default")
 \item{colors}{An optional vector of rgb or colors to use. Overwrites \code{p}}
 
 \item{order}{Order of the palette, "default", "reverse" or "random"}
+
+\item{na_value}{Color to use for NA values. Default \code{"gray50"}}
 }
 \description{
 Custom discrete ggplot2 scale color

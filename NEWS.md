@@ -1,5 +1,3 @@
-# jakR2 0.4.3
-
 # jakR2 0.4
 
 * Reworked alpha-diversity functions with corrected naming and Hill number framework
@@ -11,6 +9,7 @@
 * Added testthat coverage for all alpha-diversity functions
 * Added embed argument to `obs2gfm()` function
 * Created `sysdata.rda` to store data accessible with `::`
+* Added na values to color themes
 
 # jakR2 0.3
 

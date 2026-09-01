@@ -196,12 +196,14 @@ jak_theme <- function(
 #' @param p color palette to use from `jakR2::jak_palettes`
 #' @param colors An optional vector of rgb or colors to use. Overwrites `p`
 #' @param order Order of the palette, "default", "reverse" or "random"
+#' @param na_value Color to use for NA values. Default `"gray50"`
 #'
 #' @export
 
 scale_color_jak_d <- function(p = "bay",
                               colors = NULL,
-                              order = "default") {
+                              order = "default",
+                              na_value = "gray50") {
   # p must be in the names of jak_palettes
   if (!p %in% names(jak_palettes)) {
     stop(paste0("'", p, "' is not a known palette name"))
@@ -226,7 +228,8 @@ scale_color_jak_d <- function(p = "bay",
         n = n, # will be determined as needed and can't be "set"
         order = order
       )
-    }
+    },
+    na.value = na_value
   )
 }
 
@@ -236,11 +239,12 @@ scale_color_jak_d <- function(p = "bay",
 #' @param p color palette to use from `jakR2::jak_palettes`
 #' @param colors An optional vector of rgb or colors to use. Overwrites `p`
 #' @param order Order of the palette, "default", "reverse" or "random"
+#' @param na_value Color to use for NA values. Default `"gray50"`
 #'
 #' @export
 
 
-scale_fill_jak_d <- function(p = "bay", colors = NULL, order = "default") {
+scale_fill_jak_d <- function(p = "bay", colors = NULL, order = "default", na_value = "gray50") {
   # p must be in the names of jak_palettes
   if (!p %in% names(jak_palettes)) {
     stop(paste0("'", p, "' is not a known palette name"))
@@ -265,6 +269,7 @@ scale_fill_jak_d <- function(p = "bay", colors = NULL, order = "default") {
         n = n, # will be determined as needed and can't be "set"
         order = order
       )
-    }
+    },
+    na.value = na_value
   )
 }
