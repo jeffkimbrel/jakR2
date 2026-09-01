@@ -5,7 +5,12 @@ Custom discrete ggplot2 scale color
 ## Usage
 
 ``` r
-scale_color_jak_d(p = "bay", colors = NULL, order = "default")
+scale_color_jak_d(
+  p = "bay",
+  colors = NULL,
+  order = "default",
+  na_value = "gray50"
+)
 ```
 
 ## Arguments
@@ -22,3 +27,7 @@ scale_color_jak_d(p = "bay", colors = NULL, order = "default")
 - order:
 
   Order of the palette, "default", "reverse" or "random"
+
+- na_value:
+
+  Color to use for NA values. Default `"gray50"`

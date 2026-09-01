@@ -1,7 +1,5 @@
 # Changelog
 
-## jakR2 0.4.3
-
 ## jakR2 0.4
 
 - Reworked alpha-diversity functions with corrected naming and Hill
@@ -18,6 +16,7 @@
   [`obs2gfm()`](https://jeffkimbrel.github.io/jakR2/reference/obs2gfm.md)
   function
 - Created `sysdata.rda` to store data accessible with `::`
+- Added na values to color themes
 
 ## jakR2 0.3
 
