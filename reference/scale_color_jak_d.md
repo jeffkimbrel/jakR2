@@ -9,7 +9,9 @@ scale_color_jak_d(
   p = "bay",
   colors = NULL,
   order = "default",
-  na_value = "gray50"
+  na_value = "gray50",
+  name = ggplot2::waiver(),
+  guide = "legend"
 )
 ```
 
@@ -31,3 +33,14 @@ scale_color_jak_d(
 - na_value:
 
   Color to use for NA values. Default `"gray50"`
+
+- name:
+
+  Legend title. Defaults to the name of the aesthetic (e.g., the
+  variable name)
+
+- guide:
+
+  Guide to use for the legend. See
+  [`ggplot2::guide_legend()`](https://ggplot2.tidyverse.org/reference/guide_legend.html)
+  for details
