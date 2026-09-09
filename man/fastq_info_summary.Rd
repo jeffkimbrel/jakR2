@@ -11,6 +11,17 @@ fastq_info_summary(file, fill = "cornflowerblue")
 
 \item{fill}{Color to use for the histogram}
 }
+\value{
+A list with four elements:
+\describe{
+\item{run_id}{Tibble with RUN_ID, TOTAL_READS, MACHINE_CODE, MACHINE,
+FLOWCELL_CODE, and FLOWCELL columns}
+\item{stats}{Descriptive statistics for read counts across samples}
+\item{pairs}{Tibble showing whether F/R read counts match for each sample}
+\item{plot}{Histogram of read counts per sample}
+}
+}
 \description{
-Summarize a fastq_info file
+Parses fastq_info.py output and extracts key statistics including read counts,
+pairing validation, run IDs, and Illumina machine/flowcell information.
 }

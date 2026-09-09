@@ -1,7 +1,19 @@
 #' Summarize a fastq_info file
 #'
+#' Parses fastq_info.py output and extracts key statistics including read counts,
+#' pairing validation, run IDs, and Illumina machine/flowcell information.
+#'
 #' @param file Path to output from fastq_info.py
 #' @param fill Color to use for the histogram
+#'
+#' @return A list with four elements:
+#'   \describe{
+#'     \item{run_id}{Tibble with RUN_ID, TOTAL_READS, MACHINE_CODE, MACHINE,
+#'       FLOWCELL_CODE, and FLOWCELL columns}
+#'     \item{stats}{Descriptive statistics for read counts across samples}
+#'     \item{pairs}{Tibble showing whether F/R read counts match for each sample}
+#'     \item{plot}{Histogram of read counts per sample}
+#'   }
 #'
 #' @export
 
@@ -61,6 +73,28 @@ fastq_info_summary <- function(file, fill = "cornflowerblue") {
     message(crayon::green("All reads appear to be from the same Illumina Run"))
   }
 
+  # Parse Illumina codes from run IDs
+  run_id_with_codes <- run_id |>
+    dplyr::rowwise() |>
+    dplyr::mutate(
+      illumina_info = list(illumina_codes(RUN_ID))
+    ) |>
+    dplyr::ungroup() |>
+    dplyr::mutate(
+      MACHINE_CODE = purrr::map_chr(illumina_info, "machine_code"),
+      MACHINE = purrr::map_chr(illumina_info, "machine"),
+      FLOWCELL_CODE = purrr::map_chr(illumina_info, "flowcell_code"),
+      FLOWCELL = purrr::map_chr(illumina_info, "flowcell")
+    ) |>
+    dplyr::select(-illumina_info)
+
+  # Display machine and flowcell info
+  for (i in seq_len(nrow(run_id_with_codes))) {
+    machine <- run_id_with_codes$MACHINE[i]
+    flowcell <- run_id_with_codes$FLOWCELL[i]
+    message(crayon::blue(glue::glue("  {machine} / {flowcell}")))
+  }
+
   s <- df |>
     dplyr::group_by(SAMPLE) |>
     dplyr::summarise(TOTAL_READS = sum(TOTAL_READS)) |>
@@ -85,7 +119,7 @@ fastq_info_summary <- function(file, fill = "cornflowerblue") {
 
 
   list(
-    "run_id" = run_id,
+    "run_id" = run_id_with_codes,
     "stats" = s_for_return,
     "pairs" = pair_count_match,
     "plot" = p
