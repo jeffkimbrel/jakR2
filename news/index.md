@@ -17,6 +17,7 @@
   function
 - Created `sysdata.rda` to store data accessible with `::`
 - Added na values to color themes
+- Illumina codes
 
 ## jakR2 0.3
 

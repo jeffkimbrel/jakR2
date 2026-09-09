@@ -112,6 +112,8 @@
   : Summarize a fastq_filter.py file in amplicon mode
 - [`fastq_filter_summary_meta()`](https://jeffkimbrel.github.io/jakR2/reference/fastq_filter_summary_meta.md)
   : Summarize a fastq_filter.py file in metagenome mode
+- [`illumina_codes()`](https://jeffkimbrel.github.io/jakR2/reference/illumina_codes.md)
+  : Get Illumina machine and flow cell information from run ID
 
 ## Utilities
 
