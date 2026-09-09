@@ -72,6 +72,7 @@ reference:
   - fastq_info_summary
   - fastq_filter_summary_amplicon
   - fastq_filter_summary_meta
+  - illumina_codes
 
 - title: Utilities
   contents:
