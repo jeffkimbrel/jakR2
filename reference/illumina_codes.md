@@ -2,8 +2,9 @@
 
 Parses Illumina run IDs to infer machine type and flow cell type based
 on instrument and flow cell codes. Run IDs can be in dot-separated
-format (e.g., "VH01105.139.AAFNL3GM5.1") or colon-separated format from
-FASTQ headers (e.g., "M01056:70:000000000-CMPN2:1").
+format (e.g., "VH01105.139.AAFNL3GM5.1"), colon-separated format from
+FASTQ headers (e.g., "M01056:70:000000000-CMPN2:1"), or just the machine
+code alone (e.g., "M01056").
 
 ## Usage
 
@@ -15,8 +16,7 @@ illumina_codes(run_id)
 
 - run_id:
 
-  Character string with the run ID, either dot-separated or
-  colon-separated format
+  Character string with the run ID (full format or machine code only)
 
 ## Value
 
@@ -32,11 +32,12 @@ A list with four elements:
 
 - flowcell_code:
 
-  The flow cell identifier
+  The flow cell identifier (NA if not provided)
 
 - flowcell:
 
-  Inferred flow cell type (e.g., "MiSeq", "NovaSeq_6000")
+  Inferred flow cell type (e.g., "MiSeq", "NovaSeq_6000"), or "Unknown
+  Flowcell Type" if not provided
 
 ## Details
 
@@ -74,5 +75,20 @@ illumina_codes("M01056:70:000000000-CMPN2:1")
 #> 
 #> $flowcell
 #> [1] "MiSeq"
+#> 
+
+# Machine code only (no flowcell info)
+illumina_codes("M01056")
+#> $machine_code
+#> [1] "M01056"
+#> 
+#> $machine
+#> [1] "MiSeq"
+#> 
+#> $flowcell_code
+#> [1] NA
+#> 
+#> $flowcell
+#> [1] "Unknown Flowcell Type"
 #> 
 ```
