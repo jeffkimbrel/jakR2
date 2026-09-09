@@ -61,3 +61,17 @@ test_that("non-string input errors", {
   expect_error(illumina_codes(123), "run_id must be a string")
   expect_error(illumina_codes(mtcars), "run_id must be a string")
 })
+
+test_that("machine code only works correctly", {
+  # Just machine code, no flowcell info
+  expect_equal(illumina_codes("M01056")$machine, "MiSeq")
+  expect_equal(illumina_codes("M01056")$machine_code, "M01056")
+  expect_true(is.na(illumina_codes("M01056")$flowcell_code))
+  expect_equal(illumina_codes("M01056")$flowcell, "Unknown Flowcell Type")
+
+  # Various machine codes
+  expect_equal(illumina_codes("VH01105")$machine, "NextSeq 2000")
+  expect_equal(illumina_codes("A00123")$machine, "NovaSeq")
+  expect_equal(illumina_codes("K00123")$machine, "HiSeq 3/4000")
+  expect_equal(illumina_codes("N00123")$machine, "NextSeq 5x0")
+})

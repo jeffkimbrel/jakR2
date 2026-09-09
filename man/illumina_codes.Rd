@@ -7,23 +7,24 @@
 illumina_codes(run_id)
 }
 \arguments{
-\item{run_id}{Character string with the run ID, either dot-separated or
-colon-separated format}
+\item{run_id}{Character string with the run ID (full format or machine code only)}
 }
 \value{
 A list with four elements:
 \describe{
 \item{machine_code}{The instrument serial number / machine code}
 \item{machine}{Inferred machine type (e.g., "MiSeq", "NovaSeq", "NextSeq 2000")}
-\item{flowcell_code}{The flow cell identifier}
-\item{flowcell}{Inferred flow cell type (e.g., "MiSeq", "NovaSeq_6000")}
+\item{flowcell_code}{The flow cell identifier (NA if not provided)}
+\item{flowcell}{Inferred flow cell type (e.g., "MiSeq", "NovaSeq_6000"),
+or "Unknown Flowcell Type" if not provided}
 }
 }
 \description{
 Parses Illumina run IDs to infer machine type and flow cell type based on
 instrument and flow cell codes. Run IDs can be in dot-separated format
-(e.g., "VH01105.139.AAFNL3GM5.1") or colon-separated format from FASTQ headers
-(e.g., "M01056:70:000000000-CMPN2:1").
+(e.g., "VH01105.139.AAFNL3GM5.1"), colon-separated format from FASTQ headers
+(e.g., "M01056:70:000000000-CMPN2:1"), or just the machine code alone
+(e.g., "M01056").
 }
 \details{
 Machine codes and regular expressions are based on information compiled by
@@ -35,4 +36,7 @@ illumina_codes("VH01105.139.AAFNL3GM5.1")
 
 # Colon-separated format (from FASTQ headers)
 illumina_codes("M01056:70:000000000-CMPN2:1")
+
+# Machine code only (no flowcell info)
+illumina_codes("M01056")
 }
