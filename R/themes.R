@@ -190,7 +190,7 @@ jak_theme <- function(
   ggplot2::theme_bw(base_size = base_size, base_family = base_family) +
     jak_transparent() +
     jak_color(base_color, plot_title_color, axis_title_color, border_width, outline_color) +
-    jak_text(base_size, plot_title_size, axis_title_size, base_family, plot_title_face, axis_title_face) +
+    jak_text(base_size, plot_title_size, axis_title_size, plot_title_face, axis_title_face, base_family) +
     jak_grid(grid_color, border_width) +
     jak_legend(legend_position, legend_size) +
     jak_strips(strip_size, strip_color, strip_line, base_color)
