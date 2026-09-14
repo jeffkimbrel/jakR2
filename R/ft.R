@@ -19,8 +19,16 @@ seqtab_to_ft <- function(seqtab,
 
   names(feature_table) <- gsub(clean, "", names(feature_table))
 
-  feature_table |>
-    ft()
+  ft(
+    table = feature_table,
+    clusters = data.frame(),
+    filter = list(),
+    merge = list(is_merged = FALSE),
+    source = list(
+      type = "seqtab",
+      created = Sys.time()
+    )
+  )
 }
 
 #' Feature table class
@@ -40,7 +48,9 @@ ft <- S7::new_class("ft",
   properties = list(
     table = S7::class_data.frame,
     clusters = S7::class_data.frame,
-    filter = S7::class_list
+    filter = S7::class_list,
+    merge = S7::class_list,  # Merge provenance information
+    source = S7::class_list  # Source provenance (files, objects, etc.)
   ),
   validator = function(self) {
     if (!all(c("ASV", "SEQUENCE") %in% names(self@table))) {

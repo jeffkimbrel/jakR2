@@ -134,7 +134,11 @@ fastq_info_summary <- function(file, fill = "cornflowerblue") {
 
 
 fastq_filter_summary_amplicon <- function(file) {
-  df <- readr::read_delim(file, delim = "\t", comment = "#", show_col_types = F) |>
+  # Read all columns first
+  df_full <- readr::read_delim(file, delim = "\t", comment = "#", show_col_types = F)
+
+  # Select columns for plotting
+  df <- df_full |>
     dplyr::select(SAMPLE, ORDER_VERIFIED, CF_READS_OUT, CF_READS_REMOVED, CF_BP_OUT, CF_BP_REMOVED) |>
     tidyr::pivot_longer(cols = c(CF_READS_OUT, CF_READS_REMOVED, CF_BP_OUT, CF_BP_REMOVED))
 
@@ -170,7 +174,8 @@ fastq_filter_summary_amplicon <- function(file) {
   df_final <- df |>
     tidyr::pivot_wider(names_from = name, values_from = value)
 
-  list("filtered" = a, "reads_removed" = b, "df" = df_final)
+  # Return full df with all columns, not just the pivoted subset
+  list("filtered" = a, "reads_removed" = b, "df" = df_full)
 }
 
 #' Summarize a fastq_filter.py file in metagenome mode
