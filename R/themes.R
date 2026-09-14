@@ -57,7 +57,9 @@ jak_color <- function(
 #'
 #' @param base_size Base font size. Default `10`.
 #' @param plot_title_size Plot title font size. Default `12`.
+#' @param plot_title_face Plot title font face. Default "plain"
 #' @param axis_title_size Axis title font size. Default `11`.
+#' @param axis_title_face Axis title font face. Default "plain"
 #' @param base_family Base font family. Default `""` (system default).
 #'
 #' @return A ggplot2 theme object
@@ -66,13 +68,15 @@ jak_text <- function(
   base_size = 10,
   plot_title_size = 12,
   axis_title_size = 11,
+  plot_title_face = "plain",
+  axis_title_face = "plain",
   base_family = ""
 ) {
   ggplot2::theme(
     text         = ggplot2::element_text(size = base_size, family = base_family),
-    plot.title   = ggplot2::element_text(size = plot_title_size, face = "bold", hjust = 0, vjust = 1),
-    axis.title.x = ggplot2::element_text(size = axis_title_size, face = "bold"),
-    axis.title.y = ggplot2::element_text(size = axis_title_size, face = "bold", angle = 90),
+    plot.title   = ggplot2::element_text(size = plot_title_size, face = plot_title_face, hjust = 0, vjust = 1),
+    axis.title.x = ggplot2::element_text(size = axis_title_size, face = axis_title_face),
+    axis.title.y = ggplot2::element_text(size = axis_title_size, face = axis_title_face, angle = 90),
     axis.text.x  = ggplot2::element_text(angle = 90, hjust = 1, vjust = 0.5)
   )
 }
@@ -171,6 +175,8 @@ jak_theme <- function(
   base_color = "gray30",
   plot_title_color = "gray30",
   axis_title_color = "gray30",
+  plot_title_face = "plain",
+  axis_title_face = "plain",
   grid_color = "transparent",
   border_width = 0.5,
   outline_color = base_color,
@@ -184,7 +190,7 @@ jak_theme <- function(
   ggplot2::theme_bw(base_size = base_size, base_family = base_family) +
     jak_transparent() +
     jak_color(base_color, plot_title_color, axis_title_color, border_width, outline_color) +
-    jak_text(base_size, plot_title_size, axis_title_size, base_family) +
+    jak_text(base_size, plot_title_size, axis_title_size, base_family, plot_title_face, axis_title_face) +
     jak_grid(grid_color, border_width) +
     jak_legend(legend_position, legend_size) +
     jak_strips(strip_size, strip_color, strip_line, base_color)
