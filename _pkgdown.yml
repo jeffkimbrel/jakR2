@@ -53,6 +53,7 @@ reference:
   - seqtab_to_ft
   - ft
   - load_ft_from_files
+  - merge_ft
   - get_asv_table
   - get_sequences
   - filter_asv_table

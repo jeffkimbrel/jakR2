@@ -14,7 +14,7 @@ First column = ASV names, remaining columns = sample abundances}
 
 \item{name}{Name for the ft object}
 
-\item{sep}{Delimiter for asv_table_file ("," for CSV, "\t" for TSV, "auto" to detect)}
+\item{sep}{Delimiter for asv_table_file ("," for CSV, "\\t" for TSV, "auto" to detect)}
 }
 \value{
 A jakR2::ft object
