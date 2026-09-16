@@ -89,6 +89,10 @@ pak::pak("jeffkimbrel/jakR2")
   : Make ft object from DADA2 seqtab
 - [`ft`](https://jeffkimbrel.github.io/jakR2/reference/ft.md) : Feature
   table class
+- [`load_ft_from_files()`](https://jeffkimbrel.github.io/jakR2/reference/load_ft_from_files.md)
+  : Load ft object from FASTA and ASV table files
+- [`merge_ft()`](https://jeffkimbrel.github.io/jakR2/reference/merge_ft.md)
+  : Merge multiple feature tables with sequence matching
 - [`get_asv_table()`](https://jeffkimbrel.github.io/jakR2/reference/get_asv_table.md)
   : Return ASV table from ft object
 - [`get_sequences()`](https://jeffkimbrel.github.io/jakR2/reference/get_sequences.md)
