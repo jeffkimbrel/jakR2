@@ -11,6 +11,8 @@ jak_theme(
   base_color = "gray30",
   plot_title_color = "gray30",
   axis_title_color = "gray30",
+  plot_title_face = "plain",
+  axis_title_face = "plain",
   grid_color = "transparent",
   border_width = 0.5,
   outline_color = base_color,
@@ -34,6 +36,10 @@ jak_theme(
 \item{plot_title_color}{Color for plot title. Default \code{"gray30"}.}
 
 \item{axis_title_color}{Color for axis titles. Default \code{"gray30"}.}
+
+\item{plot_title_face}{Plot title font face. Default "plain"}
+
+\item{axis_title_face}{Axis title font face. Default "plain"}
 
 \item{grid_color}{Color for major grid lines. Default \code{"transparent"} (no grid).}
 

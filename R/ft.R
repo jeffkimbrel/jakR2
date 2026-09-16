@@ -239,3 +239,139 @@ S7::method(cluster_asv_table, ft) <- function(x, id = 0.99, nproc = 1, quiet = T
 
   return(x)
 }
+
+
+
+#' Load ft object from FASTA and ASV table files
+#'
+#' Helper function to create a jakR2::ft object from separate FASTA (sequences)
+#' and ASV table (abundance) files on disk.
+#'
+#' @param fasta_file Path to FASTA file with sequences (headers = ASV names)
+#' @param asv_table_file Path to ASV table file (CSV or TSV)
+#'   First column = ASV names, remaining columns = sample abundances
+#' @param name Name for the ft object
+#' @param sep Delimiter for asv_table_file ("," for CSV, "\t" for TSV, "auto" to detect)
+#'
+#' @return A jakR2::ft object
+#' @export
+
+load_ft_from_files <- function(
+  fasta_file,
+  asv_table_file,
+  name = "ft",
+  sep = "auto"
+) {
+
+  if (!requireNamespace("Biostrings", quietly = TRUE)) {
+    cli::cli_abort("Package {.pkg Biostrings} needed to read FASTA")
+  }
+
+  if (!requireNamespace("jakR2", quietly = TRUE)) {
+    cli::cli_abort("Package {.pkg jakR2} needed to create ft object")
+  }
+
+  # Read FASTA
+  cli::cli_alert_info("Reading FASTA: {basename(fasta_file)}")
+  seqs <- Biostrings::readDNAStringSet(fasta_file)
+
+  # Extract ASV names from FASTA headers
+  asv_names <- names(seqs)
+  sequences <- as.character(seqs)
+  names(sequences) <- asv_names
+
+  cli::cli_alert_success("Loaded {length(sequences)} sequences")
+
+  # Read ASV table
+  cli::cli_alert_info("Reading ASV table: {basename(asv_table_file)}")
+
+  if (sep == "auto") {
+    # Detect delimiter from file extension or first line
+    if (grepl("\\.csv$", asv_table_file, ignore.case = TRUE)) {
+      sep <- ","
+    } else if (grepl("\\.tsv$|\\.txt$", asv_table_file, ignore.case = TRUE)) {
+      sep <- "\t"
+    } else {
+      # Read first line to detect
+      first_line <- readLines(asv_table_file, n = 1)
+      if (grepl(",", first_line)) {
+        sep <- ","
+      } else {
+        sep <- "\t"
+      }
+    }
+    cli::cli_alert_info("Detected delimiter: '{sep}'")
+  }
+
+  asv_table <- readr::read_delim(asv_table_file, delim = sep, show_col_types = FALSE)
+
+  # First column should be ASV names
+  asv_col <- names(asv_table)[1]
+  sample_cols <- names(asv_table)[-1]
+
+  cli::cli_alert_success("Loaded {nrow(asv_table)} ASVs × {length(sample_cols)} samples")
+
+  # Check that ASVs match between FASTA and table
+  table_asvs <- asv_table[[asv_col]]
+  fasta_asvs <- asv_names
+
+  in_both <- intersect(table_asvs, fasta_asvs)
+  only_table <- setdiff(table_asvs, fasta_asvs)
+  only_fasta <- setdiff(fasta_asvs, table_asvs)
+
+  if (length(only_table) > 0) {
+    cli::cli_alert_warning("{length(only_table)} ASV{?s} in table but not in FASTA")
+    cli::cli_alert_info("  Examples: {paste(head(only_table, 3), collapse = ', ')}")
+  }
+
+  if (length(only_fasta) > 0) {
+    cli::cli_alert_warning("{length(only_fasta)} sequence{?s} in FASTA but not in table")
+    cli::cli_alert_info("  Examples: {paste(head(only_fasta, 3), collapse = ', ')}")
+  }
+
+  if (length(in_both) == 0) {
+    cli::cli_abort("No matching ASVs between FASTA and table!")
+  }
+
+  # Filter to matching ASVs only
+  asv_table_filtered <- asv_table %>%
+    dplyr::filter(.data[[asv_col]] %in% in_both)
+
+  sequences_filtered <- sequences[in_both]
+
+  cli::cli_alert_info("Using {length(in_both)} ASVs present in both files")
+
+  # Build ft table: ASV, SEQUENCE, sample1, sample2, ...
+  cli::cli_alert_info("Creating ft object")
+
+  # Start with ASV names and sequences
+  ft_table <- tibble::tibble(
+    ASV = names(sequences_filtered),
+    SEQUENCE = as.character(sequences_filtered)
+  )
+
+  # Add ASV column to abundance table for joining
+  abundance_with_asv <- asv_table_filtered
+  colnames(abundance_with_asv)[1] <- "ASV"
+
+  # Join by ASV to maintain order and add abundance columns
+  ft_table <- dplyr::left_join(ft_table, abundance_with_asv, by = "ASV")
+
+  # Create ft object
+  ft <- jakR2::ft(
+    table = ft_table,
+    clusters = data.frame(),
+    filter = list(),
+    merge = list(is_merged = FALSE),
+    source = list(
+      type = "files",
+      fasta_file = normalizePath(fasta_file),
+      asv_table_file = normalizePath(asv_table_file),
+      created = Sys.time()
+    )
+  )
+
+  cli::cli_alert_success("ft object created: {name}")
+
+  return(ft)
+}

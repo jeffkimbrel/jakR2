@@ -8,6 +8,8 @@ jak_text(
   base_size = 10,
   plot_title_size = 12,
   axis_title_size = 11,
+  plot_title_face = "plain",
+  axis_title_face = "plain",
   base_family = ""
 )
 }
@@ -17,6 +19,10 @@ jak_text(
 \item{plot_title_size}{Plot title font size. Default \code{12}.}
 
 \item{axis_title_size}{Axis title font size. Default \code{11}.}
+
+\item{plot_title_face}{Plot title font face. Default "plain"}
+
+\item{axis_title_face}{Axis title font face. Default "plain"}
 
 \item{base_family}{Base font family. Default \code{""} (system default).}
 }
