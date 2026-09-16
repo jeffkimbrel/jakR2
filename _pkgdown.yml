@@ -52,6 +52,7 @@ reference:
   - seqtab_stats
   - seqtab_to_ft
   - ft
+  - load_ft_from_files
   - get_asv_table
   - get_sequences
   - filter_asv_table
