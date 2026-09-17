@@ -1,18 +1,18 @@
-#' Merge multiple feature tables with sequence matching
+#' Merge multiple feature tables with priority-based naming
 #'
-#' Combines a reference ft object with one or more new ft objects. Sequences
-#' that match the reference retain their original names; novel sequences are
-#' assigned new names with a user-specified prefix.
+#' Combines multiple ft objects in priority order. For each unique sequence,
+#' the ASV name from the highest-priority ft is used. Name collisions (different
+#' sequences with the same ASV name) are resolved using the new_prefix.
 #'
-#' @param reference_ft Feature table (ft object) with established feature names
-#' @param new_fts Single ft object or list of ft objects to merge into reference
-#' @param new_prefix Character string prefix for novel sequences (e.g., "ASV_new_").
-#'   Must not create collisions with existing reference names.
+#' @param fts List of ft objects in priority order (first = highest priority)
+#' @param new_prefix Character string prefix for resolving name collisions
+#'   (e.g., "collision_"). Only used when different sequences share the same
+#'   ASV name across fts.
 #' @param sample_collision Strategy for handling duplicate sample names:
 #'   \itemize{
 #'     \item "error" (default): Abort if any sample names collide
-#'     \item "suffix": Append source identifier to new ft sample names
-#'     \item "prefix": Prepend source identifier to new ft sample names
+#'     \item "suffix": Append source identifier to ft sample names
+#'     \item "prefix": Prepend source identifier to ft sample names
 #'   }
 #'
 #' @return A merged ft object containing:
@@ -21,39 +21,36 @@
 #'   \item{metadata}{Merge statistics and provenance}
 #'
 #' @details
-#' The reference ft remains unchanged - its feature names and sample names are
-#' preserved exactly. New sequences are numbered starting from 1 with the
-#' user-provided prefix.
-#'
-#' Feature naming logic:
-#' \itemize{
-#'   \item Sequences matching reference: use reference name (e.g., "ASV1")
-#'   \item Novel sequences: use new_prefix + counter (e.g., "ASV_new_1", "ASV_new_2")
+#' Feature naming logic processes fts in order:
+#' \enumerate{
+#'   \item If sequence exists in higher-priority ft: use that ASV name
+#'   \item If sequence is new AND name doesn't collide: keep original ASV name
+#'   \item If sequence is new AND name collides: assign new name with new_prefix + counter
 #' }
 #'
-#' The function validates that generated names won't collide with reference names.
-#' If a collision is detected, the merge aborts with an error suggesting a
-#' different prefix.
+#' This preserves existing nomenclature from higher-priority fts while resolving
+#' conflicts deterministically.
 #'
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' # Reference has ASV1-ASV711
-#' # New data has some matching sequences and some novel ones
+#' # Primary ft: ASV1-ASV100
+#' # Secondary ft: ASV50-ASV150 (ASV50-100 are different sequences)
+#' # Tertiary ft: ASV200-ASV250
 #' merged <- merge_ft(
-#'   reference_ft = ref,
-#'   new_fts = list(run1, run2),
-#'   new_prefix = "ASV_2024_"
+#'   fts = list(primary, secondary, tertiary),
+#'   new_prefix = "collision_"
 #' )
 #'
-#' # Result contains:
-#' # - ASV1-ASV711 (original names for matching sequences)
-#' # - ASV_2024_1, ASV_2024_2, ... (novel sequences)
+#' # Result:
+#' # - ASV1-ASV100 (from primary, unchanged)
+#' # - collision_1 to collision_51 (secondary's ASV50-100 renamed due to collision)
+#' # - ASV101-ASV150 (secondary, no collision, kept)
+#' # - ASV200-ASV250 (tertiary, no collision, kept)
 #' }
 merge_ft <- function(
-  reference_ft,
-  new_fts,
+  fts,
   new_prefix,
   sample_collision = c("error", "suffix", "prefix")
 ) {
@@ -61,17 +58,12 @@ merge_ft <- function(
   # Validate inputs
   sample_collision <- match.arg(sample_collision)
 
-  if (!inherits(reference_ft, "jakR2::ft")) {
-    cli::cli_abort("reference_ft must be a jakR2::ft object")
+  if (!is.list(fts) || length(fts) < 2) {
+    cli::cli_abort("fts must be a list of at least 2 ft objects")
   }
 
-  # Coerce single ft to list
-  if (inherits(new_fts, "jakR2::ft")) {
-    new_fts <- list(new_fts)
-  }
-
-  if (!all(sapply(new_fts, function(x) inherits(x, "jakR2::ft")))) {
-    cli::cli_abort("All new_fts must be jakR2::ft objects")
+  if (!all(sapply(fts, function(x) inherits(x, "jakR2::ft")))) {
+    cli::cli_abort("All fts must be jakR2::ft objects")
   }
 
   if (missing(new_prefix) || is.null(new_prefix) || new_prefix == "") {
@@ -79,137 +71,124 @@ merge_ft <- function(
   }
 
   cli::cli_h2("Merging feature tables")
-
-  # Count samples properly (exclude ASV and SEQUENCE columns)
-  ref_n_samples <- length(setdiff(colnames(reference_ft@table), c("ASV", "SEQUENCE")))
-  ref_n_features <- nrow(reference_ft@table)
-
-  cli::cli_alert_info("Reference: {ref_n_features} features, {ref_n_samples} samples")
-  cli::cli_alert_info("Merging {length(new_fts)} new ft object{?s}")
+  cli::cli_alert_info("Processing {length(fts)} ft objects in priority order")
 
   # Step 1: Check sample name collisions
   cli::cli_alert_info("Checking for sample name collisions")
 
-  # Get sample names (all columns except ASV and SEQUENCE)
-  ref_table <- get_asv_table(reference_ft)
-  ref_samples <- setdiff(colnames(ref_table), c("ASV", "SEQUENCE"))
+  # Get sample names from all fts
+  all_samples <- character(0)
+  for (i in seq_along(fts)) {
+    samples <- setdiff(colnames(fts[[i]]@table), c("ASV", "SEQUENCE"))
+    all_samples <- c(all_samples, samples)
+  }
 
-  new_samples_list <- lapply(seq_along(new_fts), function(i) {
-    table <- get_asv_table(new_fts[[i]])
-    samples <- setdiff(colnames(table), c("ASV", "SEQUENCE"))
-    list(idx = i, samples = samples)
-  })
+  duplicated_samples <- all_samples[duplicated(all_samples)]
 
-  all_new_samples <- unlist(lapply(new_samples_list, function(x) x$samples))
-
-  # Check for collisions
-  ref_collisions <- intersect(ref_samples, all_new_samples)
-  new_internal_collisions <- all_new_samples[duplicated(all_new_samples)]
-
-  if (length(ref_collisions) > 0 || length(new_internal_collisions) > 0) {
+  if (length(duplicated_samples) > 0) {
     if (sample_collision == "error") {
       msg <- c(
         "Sample name collisions detected:",
-        if (length(ref_collisions) > 0) paste0("  Reference vs new: ", paste(head(ref_collisions, 5), collapse = ", ")),
-        if (length(new_internal_collisions) > 0) paste0("  Between new fts: ", paste(head(unique(new_internal_collisions), 5), collapse = ", ")),
+        paste0("  ", paste(head(unique(duplicated_samples), 5), collapse = ", ")),
         "i" = "Use sample_collision = 'suffix' or 'prefix' to resolve automatically"
       )
       cli::cli_abort(msg)
     } else if (sample_collision == "suffix") {
-      # Rename sample columns in new_fts with suffix (preserve ASV and SEQUENCE)
-      for (i in seq_along(new_fts)) {
-        table <- new_fts[[i]]@table
+      # Rename sample columns with suffix (preserve priority 1, rename others)
+      for (i in 2:length(fts)) {
+        table <- fts[[i]]@table
         sample_cols <- setdiff(colnames(table), c("ASV", "SEQUENCE"))
-        colnames(table)[colnames(table) %in% sample_cols] <- paste0(sample_cols, "_new", i)
-        new_fts[[i]]@table <- table
+        colnames(table)[colnames(table) %in% sample_cols] <- paste0(sample_cols, "_ft", i)
+        fts[[i]]@table <- table
       }
-      cli::cli_alert_warning("Renamed samples in new fts with suffix: _new1, _new2, ...")
+      cli::cli_alert_warning("Renamed samples in lower-priority fts with suffix: _ft2, _ft3, ...")
     } else if (sample_collision == "prefix") {
-      # Rename sample columns in new_fts with prefix (preserve ASV and SEQUENCE)
-      for (i in seq_along(new_fts)) {
-        table <- new_fts[[i]]@table
+      # Rename sample columns with prefix (preserve priority 1, rename others)
+      for (i in 2:length(fts)) {
+        table <- fts[[i]]@table
         sample_cols <- setdiff(colnames(table), c("ASV", "SEQUENCE"))
-        colnames(table)[colnames(table) %in% sample_cols] <- paste0("new", i, "_", sample_cols)
-        new_fts[[i]]@table <- table
+        colnames(table)[colnames(table) %in% sample_cols] <- paste0("ft", i, "_", sample_cols)
+        fts[[i]]@table <- table
       }
-      cli::cli_alert_warning("Renamed samples in new fts with prefix: new1_, new2_, ...")
+      cli::cli_alert_warning("Renamed samples in lower-priority fts with prefix: ft2_, ft3_, ...")
     }
   } else {
     cli::cli_alert_success("No sample name collisions detected")
   }
 
-  # Step 2: Build sequence → name mapping from reference
-  cli::cli_alert_info("Building sequence mapping from reference")
+  # Step 2: Build sequence → name mapping in priority order
+  cli::cli_alert_info("Building sequence mapping in priority order")
 
-  ref_seqs <- get_sequences(reference_ft)
-  ref_names <- names(ref_seqs)
-  seq_to_name <- setNames(ref_names, as.character(ref_seqs))
-  existing_names <- ref_names
-
-  # Track statistics
-  n_matched <- 0
-  n_novel <- 0
+  seq_to_name <- list()  # sequence → ASV name
+  existing_names <- character(0)  # all ASV names seen
   new_counter <- 1
 
-  # Step 3: Process sequences from new fts
-  cli::cli_alert_info("Processing sequences from new ft objects")
+  # Track statistics per ft
+  n_matched <- integer(length(fts))  # sequences matched to higher priority
+  n_kept <- integer(length(fts))     # new sequences kept original name
+  n_renamed <- integer(length(fts))  # new sequences renamed due to collision
 
-  for (i in seq_along(new_fts)) {
-    ft <- new_fts[[i]]
-    new_seqs <- get_sequences(ft)
+  # Process each ft in priority order
+  for (i in seq_along(fts)) {
+    ft_table <- fts[[i]]@table
 
-    cli::cli_alert_info("  Processing ft {i}/{length(new_fts)}: {length(new_seqs)} sequences")
+    cli::cli_alert_info("  Processing ft {i}/{length(fts)}: {nrow(ft_table)} ASVs")
 
-    for (seq in as.character(new_seqs)) {
+    for (j in seq_len(nrow(ft_table))) {
+      seq <- as.character(ft_table$SEQUENCE[j])
+      original_name <- ft_table$ASV[j]
+
       if (seq %in% names(seq_to_name)) {
-        # Match - use existing name
-        n_matched <- n_matched + 1
+        # Sequence already seen in higher-priority ft - use that name
+        n_matched[i] <- n_matched[i] + 1
       } else {
-        # Novel - generate new name
-        new_name <- paste0(new_prefix, new_counter)
+        # New sequence - check if name collides
+        if (original_name %in% existing_names) {
+          # Name collision - assign new name with prefix
+          new_name <- paste0(new_prefix, new_counter)
 
-        # Check for collision with reference names
-        if (new_name %in% existing_names) {
-          # Find examples of colliding names
-          collision_examples <- head(ref_names[grepl(paste0("^", gsub("\\.", "\\\\.", new_prefix)), ref_names)], 3)
-          cli::cli_abort(c(
-            "Name collision detected!",
-            "x" = "Generated name '{new_name}' already exists in reference",
-            "i" = "Reference contains: {paste(collision_examples, collapse = ', ')}",
-            "i" = "Choose a different new_prefix that won't collide"
-          ))
+          # Ensure no collision (shouldn't happen if prefix is unique)
+          while (new_name %in% existing_names) {
+            new_counter <- new_counter + 1
+            new_name <- paste0(new_prefix, new_counter)
+          }
+
+          seq_to_name[[seq]] <- new_name
+          existing_names <- c(existing_names, new_name)
+          new_counter <- new_counter + 1
+          n_renamed[i] <- n_renamed[i] + 1
+        } else {
+          # No collision - keep original name
+          seq_to_name[[seq]] <- original_name
+          existing_names <- c(existing_names, original_name)
+          n_kept[i] <- n_kept[i] + 1
         }
-
-        # Safe to add
-        seq_to_name[seq] <- new_name
-        existing_names <- c(existing_names, new_name)
-        new_counter <- new_counter + 1
-        n_novel <- n_novel + 1
       }
     }
   }
 
   cli::cli_alert_success("Sequence mapping complete:")
-  cli::cli_alert_info("  {n_matched} sequence{?s} matched reference")
-  cli::cli_alert_info("  {n_novel} novel sequence{?s} assigned new names")
+  for (i in seq_along(fts)) {
+    if (i == 1) {
+      cli::cli_alert_info("  ft {i}: {n_kept[i]} ASVs (highest priority)")
+    } else {
+      cli::cli_alert_info("  ft {i}: {n_matched[i]} matched, {n_kept[i]} kept, {n_renamed[i]} renamed")
+    }
+  }
 
-  # Step 4: Build unified ft table
+  # Step 3: Build unified ft table
   cli::cli_alert_info("Building unified ft table")
 
-  # Start with reference table
-  ref_table <- reference_ft@table
+  # Process each ft and rename ASV column to unified names
+  all_tables <- list()
 
-  # Process each new ft and rename ASV column to unified names
-  all_tables <- list(ref_table)
+  for (i in seq_along(fts)) {
+    ft_table <- fts[[i]]@table
 
-  for (i in seq_along(new_fts)) {
-    ft <- new_fts[[i]]
-    ft_table <- ft@table
+    # Map original ASV names to unified names based on sequences
+    ft_table$ASV <- sapply(ft_table$SEQUENCE, function(seq) seq_to_name[[as.character(seq)]])
 
-    # Map old ASV names to unified names based on sequences
-    ft_table$ASV <- sapply(ft_table$SEQUENCE, function(seq) seq_to_name[as.character(seq)])
-
-    all_tables[[i + 1]] <- ft_table
+    all_tables[[i]] <- ft_table
   }
 
   # Combine all tables
@@ -225,7 +204,7 @@ merge_ft <- function(
     dplyr::group_by(ASV, SEQUENCE) %>%
     dplyr::summarise(dplyr::across(dplyr::all_of(sample_cols), sum), .groups = "drop")
 
-  # Step 5: Build merge provenance
+  # Step 4: Build merge provenance
   cli::cli_alert_info("Building merge provenance")
 
   # Helper to extract meaningful name from ft source
@@ -244,41 +223,38 @@ merge_ft <- function(
   }
 
   # Get sample provenance with meaningful names
-  ref_name <- get_ft_name(reference_ft)
-  ref_samples <- setdiff(colnames(ref_table), c("ASV", "SEQUENCE"))
-
   sample_provenance <- list()
-  sample_provenance[[ref_name]] <- ref_samples
+  ft_names <- character(0)
 
-  ft_names <- c(ref_name)
+  for (i in seq_along(fts)) {
+    ft_name <- get_ft_name(fts[[i]])
 
-  for (i in seq_along(new_fts)) {
-    ft_name <- get_ft_name(new_fts[[i]])
     # Ensure unique names
     if (ft_name %in% ft_names) {
       ft_name <- paste0(ft_name, "_", i)
     }
     ft_names <- c(ft_names, ft_name)
 
-    ft_samples <- setdiff(colnames(new_fts[[i]]@table), c("ASV", "SEQUENCE"))
+    ft_samples <- setdiff(colnames(fts[[i]]@table), c("ASV", "SEQUENCE"))
     sample_provenance[[ft_name]] <- ft_samples
   }
 
   # Create merge info
   merge_info <- list(
     is_merged = TRUE,
-    n_source_fts = 1 + length(new_fts),
-    reference_name = ref_name,
-    n_reference_features = length(ref_names),
-    n_matched_sequences = n_matched,
-    n_novel_sequences = n_novel,
+    n_source_fts = length(fts),
+    priority_order = ft_names,
+    n_features_per_ft = sapply(fts, function(ft) nrow(ft@table)),
+    n_matched_per_ft = n_matched,
+    n_kept_per_ft = n_kept,
+    n_renamed_per_ft = n_renamed,
     new_prefix = new_prefix,
     sample_collision_strategy = sample_collision,
     sample_provenance = sample_provenance,
     merge_date = Sys.time()
   )
 
-  # Step 6: Create merged ft object
+  # Step 5: Create merged ft object
   cli::cli_alert_info("Creating merged ft object")
 
   merged_ft <- jakR2::ft(
@@ -294,11 +270,14 @@ merge_ft <- function(
 
   cli::cli_alert_success("Merge complete!")
 
-  # Count sample columns (exclude ASV and SEQUENCE)
-  n_samples <- length(setdiff(colnames(merged_table), c("ASV", "SEQUENCE")))
+  # Count final features and samples
+  n_samples <- length(sample_cols)
   n_features <- nrow(merged_table)
+  n_total_matched <- sum(n_matched)
+  n_total_kept <- sum(n_kept)
+  n_total_renamed <- sum(n_renamed)
 
-  cli::cli_alert_info("Final ft: {n_features} features ({n_matched} matched, {n_novel} novel), {n_samples} samples")
+  cli::cli_alert_info("Final ft: {n_features} features ({n_total_matched} matched, {n_total_kept} kept, {n_total_renamed} renamed), {n_samples} samples")
 
   return(merged_ft)
 }

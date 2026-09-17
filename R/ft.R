@@ -251,7 +251,7 @@ S7::method(cluster_asv_table, ft) <- function(x, id = 0.99, nproc = 1, quiet = T
 #' @param asv_table_file Path to ASV table file (CSV or TSV)
 #'   First column = ASV names, remaining columns = sample abundances
 #' @param name Name for the ft object
-#' @param sep Delimiter for asv_table_file ("," for CSV, "\t" for TSV, "auto" to detect)
+#' @param sep Delimiter for asv_table_file ("," for CSV, "\\t" for TSV, "auto" to detect)
 #'
 #' @return A jakR2::ft object
 #' @export
