@@ -18,6 +18,9 @@
 - Created `sysdata.rda` to store data accessible with `::`
 - Added na values to color themes
 - Illumina codes
+- [`merge_ft()`](https://jeffkimbrel.github.io/jakR2/reference/merge_ft.md)
+  and
+  [`load_ft_from_files()`](https://jeffkimbrel.github.io/jakR2/reference/load_ft_from_files.md)
 
 ## jakR2 0.3
 

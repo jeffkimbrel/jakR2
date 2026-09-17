@@ -1,34 +1,27 @@
-# Merge multiple feature tables with sequence matching
+# Merge multiple feature tables with priority-based naming
 
-Combines a reference ft object with one or more new ft objects.
-Sequences that match the reference retain their original names; novel
-sequences are assigned new names with a user-specified prefix.
+Combines multiple ft objects in priority order. For each unique
+sequence, the ASV name from the highest-priority ft is used. Name
+collisions (different sequences with the same ASV name) are resolved
+using the new_prefix.
 
 ## Usage
 
 ``` r
-merge_ft(
-  reference_ft,
-  new_fts,
-  new_prefix,
-  sample_collision = c("error", "suffix", "prefix")
-)
+merge_ft(fts, new_prefix, sample_collision = c("error", "suffix", "prefix"))
 ```
 
 ## Arguments
 
-- reference_ft:
+- fts:
 
-  Feature table (ft object) with established feature names
-
-- new_fts:
-
-  Single ft object or list of ft objects to merge into reference
+  List of ft objects in priority order (first = highest priority)
 
 - new_prefix:
 
-  Character string prefix for novel sequences (e.g., "ASV_new\_"). Must
-  not create collisions with existing reference names.
+  Character string prefix for resolving name collisions (e.g.,
+  "collision\_"). Only used when different sequences share the same ASV
+  name across fts.
 
 - sample_collision:
 
@@ -36,9 +29,9 @@ merge_ft(
 
   - "error" (default): Abort if any sample names collide
 
-  - "suffix": Append source identifier to new ft sample names
+  - "suffix": Append source identifier to ft sample names
 
-  - "prefix": Prepend source identifier to new ft sample names
+  - "prefix": Prepend source identifier to ft sample names
 
 ## Value
 
@@ -58,35 +51,34 @@ A merged ft object containing:
 
 ## Details
 
-The reference ft remains unchanged - its feature names and sample names
-are preserved exactly. New sequences are numbered starting from 1 with
-the user-provided prefix.
+Feature naming logic processes fts in order:
 
-Feature naming logic:
+1.  If sequence exists in higher-priority ft: use that ASV name
 
-- Sequences matching reference: use reference name (e.g., "ASV1")
+2.  If sequence is new AND name doesn't collide: keep original ASV name
 
-- Novel sequences: use new_prefix + counter (e.g., "ASV_new_1",
-  "ASV_new_2")
+3.  If sequence is new AND name collides: assign new name with
+    new_prefix + counter
 
-The function validates that generated names won't collide with reference
-names. If a collision is detected, the merge aborts with an error
-suggesting a different prefix.
+This preserves existing nomenclature from higher-priority fts while
+resolving conflicts deterministically.
 
 ## Examples
 
 ``` r
 if (FALSE) { # \dontrun{
-# Reference has ASV1-ASV711
-# New data has some matching sequences and some novel ones
+# Primary ft: ASV1-ASV100
+# Secondary ft: ASV50-ASV150 (ASV50-100 are different sequences)
+# Tertiary ft: ASV200-ASV250
 merged <- merge_ft(
-  reference_ft = ref,
-  new_fts = list(run1, run2),
-  new_prefix = "ASV_2024_"
+  fts = list(primary, secondary, tertiary),
+  new_prefix = "collision_"
 )
 
-# Result contains:
-# - ASV1-ASV711 (original names for matching sequences)
-# - ASV_2024_1, ASV_2024_2, ... (novel sequences)
+# Result:
+# - ASV1-ASV100 (from primary, unchanged)
+# - collision_1 to collision_51 (secondary's ASV50-100 renamed due to collision)
+# - ASV101-ASV150 (secondary, no collision, kept)
+# - ASV200-ASV250 (tertiary, no collision, kept)
 } # }
 ```
