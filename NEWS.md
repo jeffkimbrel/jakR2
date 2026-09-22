@@ -12,6 +12,7 @@
 * Added na values to color themes
 * Illumina codes
 * `merge_ft()` and `load_ft_from_files()`
+* New `n` argument to `show_all_color_palettes()` to make it easier to select a palette based on the ramped values
 
 # jakR2 0.3
 

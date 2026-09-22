@@ -4,10 +4,12 @@
 \alias{show_all_color_palettes}
 \title{Show all color palettes in the jak_palettes object}
 \usage{
-show_all_color_palettes(alpha = 1)
+show_all_color_palettes(alpha = 1, n = 0)
 }
 \arguments{
 \item{alpha}{A numeric value between 0 and 1 for the transparency of the colors}
+
+\item{n}{Ramp to this amount}
 }
 \description{
 Show all color palettes in the jak_palettes object

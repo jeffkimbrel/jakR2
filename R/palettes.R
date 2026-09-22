@@ -155,26 +155,41 @@ show_color_palette <- function(pal,
 #' Show all color palettes in the jak_palettes object
 #'
 #' @param alpha A numeric value between 0 and 1 for the transparency of the colors
+#' @param n Ramp to this amount
 #'
 #' @export
 
-show_all_color_palettes <- function(alpha = 1) {
+show_all_color_palettes <- function(alpha = 1, n = 0) {
   # Check if alpha is a valid numeric value between 0 and 1
   if (!is.numeric(alpha) || length(alpha) != 1 || alpha < 0 || alpha > 1) {
-    stop("alpha must be a numeric value between 0 and 1", call. = F)
+    cli::cli_abort("alpha must be a numeric value between 0 and 1", call. = F)
+  }
+
+  # Check if n is a valid numeric value between 0 and 100
+  if (!is.numeric(n) || length(n) != 1 || n < 0 || n > 100) {
+    cli::cli_abort("n must be a numeric value between 0 and 100", call. = F)
   }
 
 
-  input2 <- lapply(jak_palettes, as.data.frame, stringsAsFactors = FALSE)
-  df <- dplyr::bind_rows(input2, .id = "Palette") |>
-    dplyr::select(Palette, RGB = `X[[i]]`)
+  if (n == 0) {
+    input2 <- lapply(jak_palettes, as.data.frame, stringsAsFactors = FALSE)
+
+    df <- dplyr::bind_rows(input2, .id = "Palette") |>
+      dplyr::select(Palette, RGB = `X[[i]]`)
+  } else {
+    df <- jak_palettes |>
+      names() |>
+      tibble::enframe(value = "Palette") |>
+      dplyr::mutate(RGB = purrr::map(Palette, \(nm) palette_jak(p = nm, n = n))) |>
+      tidyr::unnest(RGB)
+  }
 
   df <- df |>
     dplyr::group_by(Palette) |>
-    dplyr::mutate(x = seq(dplyr::n()))
+    dplyr::mutate(n_colors = seq(dplyr::n()))
 
   df |>
-    ggplot2::ggplot(ggplot2::aes(x = x, y = Palette, fill = RGB)) +
+    ggplot2::ggplot(ggplot2::aes(x = n_colors, y = Palette, fill = RGB)) +
     ggplot2::theme_minimal() +
     ggplot2::geom_tile(alpha = alpha) +
     ggplot2::scale_fill_identity() +
