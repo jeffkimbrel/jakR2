@@ -21,6 +21,9 @@
 - [`merge_ft()`](https://jeffkimbrel.github.io/jakR2/reference/merge_ft.md)
   and
   [`load_ft_from_files()`](https://jeffkimbrel.github.io/jakR2/reference/load_ft_from_files.md)
+- New `n` argument to
+  [`show_all_color_palettes()`](https://jeffkimbrel.github.io/jakR2/reference/show_all_color_palettes.md)
+  to make it easier to select a palette based on the ramped values
 
 ## jakR2 0.3
 
